@@ -6,6 +6,7 @@
 #include <cstring>
 
 #include "DataGenerator.h"
+#include "Radix_Sort.h"
 using namespace std;
 
 enum Mode{a, c};
@@ -57,9 +58,10 @@ void Init_Output(){
     
 }
 
-string Algorithm_Option(string key, bool just_name, int &timer, int &comparison, int a[] = nullptr){
+string Algorithm_Option(string key, bool just_name, clock_t &timer, int &comparison, int a[] = nullptr, int n = 0){
     string al_name;
     clock_t start, end;
+    comparison = 0;
     switch (algorithm[key])
     {
     //Selection, Insertion, Bubble, Shaker, Shell,
@@ -132,7 +134,7 @@ string Algorithm_Option(string key, bool just_name, int &timer, int &comparison,
         al_name = "Radix sort";
         if(just_name) return al_name;
         start = clock();
-        // call Radix_sort
+        radixSort(a, n);
         end = clock();
     }break;
     case Flash:{
@@ -149,17 +151,17 @@ string Algorithm_Option(string key, bool just_name, int &timer, int &comparison,
     return al_name;
 }
 
-void Output_Option(string out_parameter, clock_t timer, int comparison){
+void Output_Option(string out_parameter, const clock_t timer, int comparison){
     switch (output[out_parameter])
     {
     case _time:{
-        cout << "Running time: " << timer << endl;
+        cout << "Running time: " << (double)timer << endl;
     }break;
     case _comp:{
         cout << "Comparison: " << comparison << endl;
     }break;
     case _both:{
-        cout << "Running time: " << timer << endl;
+        cout << "Running time: " << (double)timer << endl;
         cout << "Comparison: " << comparison << endl;
     }break;
     
@@ -189,8 +191,6 @@ string Input_Order(string input_order){
 }
 
 void Algorithm_Mode(string al, string input_file, int input_size, string input_order,string out_parameter, bool exist){
-    int timer;
-    int comparison;
     int *a;
     // Command 1 
     if(exist){
@@ -212,7 +212,11 @@ void Algorithm_Mode(string al, string input_file, int input_size, string input_o
         }
         inp.close();
     }
-    string temp = Algorithm_Option(al, false, timer, comparison, a);
+
+    clock_t timer;
+    int comparison;
+    
+    string temp = Algorithm_Option(al, false, timer, comparison, a, input_size);
     if(!exist) cout << "Input order: " << Input_Order(input_order) << endl;
     cout << "---------------------------" << endl;
     Output_Option(out_parameter, timer, comparison);
@@ -220,7 +224,7 @@ void Algorithm_Mode(string al, string input_file, int input_size, string input_o
     delete a;
 }
 
-int main(int argc, char* argv[]){
+int main(int argc, char* argv[]){ 
     Init_Mode();
     Init_Algorithm();
     Init_Order();
@@ -231,7 +235,8 @@ int main(int argc, char* argv[]){
     case 0:{// Algorithm mode
         cout << "ALGORITHM MODE" << endl;
         int dummy;
-        cout << Algorithm_Option(argv[2], true, dummy, dummy) << endl;
+        clock_t dummy_t;
+        cout << Algorithm_Option(argv[2], true, dummy_t, dummy) << endl;
         string temp = argv[3];
         // Command 1
         if(temp.find(".txt") != temp.npos){
