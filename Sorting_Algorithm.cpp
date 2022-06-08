@@ -4,6 +4,8 @@
 #include <string>
 #include <fstream>
 #include <cstring>
+
+#include "DataGenerator.h"
 using namespace std;
 
 enum Mode{a, c};
@@ -18,8 +20,6 @@ static map<string, Mode> mode;
 static map<string, Algorithm> algorithm; 
 static map<string, Order> order;
 static map<string, Output> output;
-
-
 
 void Init_Mode(){
     mode["-a"] = a;
@@ -54,13 +54,13 @@ void Init_Output(){
     output["-time"] = _time;
     output["-comp"] = _comp;
     output["-both"] = _both;
-    output["-all"] = _all;
+    
 }
 
-string Algorithm_Option(int key, &ifstream input_file, clock_t &timer, int &comparison, bool just_name){
+string Algorithm_Option(string key, bool just_name, int &timer, int &comparison, int a[] = nullptr){
     string al_name;
     clock_t start, end;
-    switch (key)
+    switch (algorithm[key])
     {
     //Selection, Insertion, Bubble, Shaker, Shell,
     case Selection:{
@@ -168,74 +168,55 @@ void Output_Option(string out_parameter, clock_t timer, int comparison){
     }
 }
 
+string Input_Order(string input_order){
+    string name;
+    switch (order[input_order])
+    {
+    case _rand:{
+        name = "Randomize";
+    }break;
+    case _nsorted:{
+        name = "Nearly Sorted";
+    }break;
+    case _sorted:{
+        name = "Sorted";
+    }break;
+    case _rev:{
+        name = "Reversed";
+    }break;
+    }
+    return name;
+}
 
-void Algorithm_Mode(string key, int, string input_file = "", int input_size = 0, string input_order = "all",string out_parameter){
-    clock_t timer;
+void Algorithm_Mode(string al, string input_file, int input_size, string input_order,string out_parameter, bool exist){
+    int timer;
     int comparison;
     int *a;
-    bool do_all = (input_order == "all");
-    
-    cout << "Algorithm name: " << Algorithm_Option(algorithm[key], inp, timer, comparison, true) << endl;
-    fstream inp(input_file, ios::in);
-    if(inp) inp >> input_size;
-    cout << "Input size:" << input_size << "\n\n";
-
-    if(!inp){
-        inp.close();
-        //generate new data
-        switch (order[input_order])
-        {
-        case _rand:{
-            inp.open("input_1.txt", ios::out);
-            //generate random input and print to "input_1.txt"
-            //GenerateData(a, input_size, _rand);
-            //Algorithm_Option(algorithm[key], inp, timer, comparison, false);
-            cout << "Input order:" <<
-            cout << "---------------------------" << endl;
-            Output_Option(out_parameter, timer, comparison);
-            cout << "\n\n";
-            //--------------------
-        }if(!do_all)break;
-        case _nsorted:{
-            inp.open("input_2.txt", ios::out);
-            //generate random input and print to "input_2.txt"
-            //GenerateData(a, input_size, _nsorted);
-            //Algorithm_Option(algorithm[key], inp, timer, comparison, false);
-            cout << "Input order:" <<
-            cout << "---------------------------" << endl;
-            Output_Option(out_parameter, timer, comparison);
-            cout << "\n\n";
-            //--------------------
-        }if(!do_all)break;
-        case _sorted:{
-            inp.open("input_3.txt", ios::out);
-            //generate random input and print to "input_3.txt"
-            //GenerateData(a, input_size, _sorted);
-            //Algorithm_Option(algorithm[key], inp, timer, comparison, false);
-            cout << "Input order:" <<
-            cout << "---------------------------" << endl;
-            Output_Option(out_parameter, timer, comparison);
-            cout << "\n\n";
-            //--------------------
-        }if(!do_all)break;
-        case _rev:{
-            inp.open("input_4.txt", ios::out);
-            //generate random input and print to "input_4.txt"
-            //GenerateData(a, input_size, _rev);
-            //Algorithm_Option(algorithm[key], inp, timer, comparison, false);
-            cout << "Input order:" <<
-            cout << "---------------------------" << endl;
-            Output_Option(out_parameter, timer, comparison);
-            cout << "\n\n";
-            //--------------------
-        }break;
-        default:
-            break;
+    // Command 1 
+    if(exist){
+        fstream inp(input_file, ios::in);
+        inp >> input_size;
+        a = new int[input_size];
+        for(int i = 0; i < input_size; i++){
+            inp >> a[i];
         }
+        inp.close();
     }
-    inp.close();
-
-
+    else {
+        a = new int[input_size];
+        GenerateData(a, input_size, order[input_order]);
+        fstream inp(input_file, ios::out);
+        inp << input_size << endl;
+        for(int i = 0; i < input_size; i++){
+            inp << a[i] << " ";
+        }
+        inp.close();
+    }
+    string temp = Algorithm_Option(al, false, timer, comparison, a);
+    if(!exist) cout << "Input order: " << Input_Order(input_order) << endl;
+    cout << "---------------------------" << endl;
+    Output_Option(out_parameter, timer, comparison);
+    cout << "\n\n";
 }
 
 int main(int argc, char* argv[]){
@@ -248,6 +229,29 @@ int main(int argc, char* argv[]){
     {
     case 0:{// Algorithm mode
         cout << "ALGORITHM MODE" << endl;
+        int dummy;
+        cout << Algorithm_Option(argv[2], true, dummy, dummy) << endl;
+        string temp = argv[3];
+        // Command 1
+        if(temp.find(".txt") != temp.npos){
+            cout << "Input file: " << argv[3];
+            fstream inp(temp, ios::in);
+            int input_size;
+            inp >> input_size;
+            inp.close();
+            cout << "Input size: " << input_size << endl;
+            Algorithm_Mode(argv[2], argv[3], 0, "", argv[4], true);
+        }
+        else{
+            cout << "Input size: " << argv[3] << endl;
+        // Command 2
+            if(argc == 6) Algorithm_Mode(argv[2],"input.txt", stoi(argv[3]), argv[4], argv[5], false);
+        // Command 3
+            if(argc == 5) Algorithm_Mode(argv[2],"input_1.txt", stoi(argv[3]), "-rand", argv[5], false);
+            if(argc == 5) Algorithm_Mode(argv[2],"input_1.txt", stoi(argv[3]), "-nsorted", argv[5], false);
+            if(argc == 5) Algorithm_Mode(argv[2],"input_1.txt", stoi(argv[3]), "-sorted", argv[5], false);
+            if(argc == 5) Algorithm_Mode(argv[2],"input_1.txt", stoi(argv[3]), "-rev", argv[5], false);
+        }
     }break;
     case 1:{// Comparison mode
         cout << "COMPARISON MODE" << endl;
