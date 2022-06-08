@@ -217,6 +217,7 @@ void Algorithm_Mode(string al, string input_file, int input_size, string input_o
     cout << "---------------------------" << endl;
     Output_Option(out_parameter, timer, comparison);
     cout << "\n\n";
+    delete a;
 }
 
 int main(int argc, char* argv[]){
@@ -247,10 +248,12 @@ int main(int argc, char* argv[]){
         // Command 2
             if(argc == 6) Algorithm_Mode(argv[2],"input.txt", stoi(argv[3]), argv[4], argv[5], false);
         // Command 3
-            if(argc == 5) Algorithm_Mode(argv[2],"input_1.txt", stoi(argv[3]), "-rand", argv[5], false);
-            if(argc == 5) Algorithm_Mode(argv[2],"input_1.txt", stoi(argv[3]), "-nsorted", argv[5], false);
-            if(argc == 5) Algorithm_Mode(argv[2],"input_1.txt", stoi(argv[3]), "-sorted", argv[5], false);
-            if(argc == 5) Algorithm_Mode(argv[2],"input_1.txt", stoi(argv[3]), "-rev", argv[5], false);
+            if(argc == 5){
+                Algorithm_Mode(argv[2],"input_1.txt", stoi(argv[3]), "-rand", argv[4], false);
+                Algorithm_Mode(argv[2],"input_2.txt", stoi(argv[3]), "-nsorted", argv[4], false);
+                Algorithm_Mode(argv[2],"input_3.txt", stoi(argv[3]), "-sorted", argv[4], false);
+                Algorithm_Mode(argv[2],"input_4.txt", stoi(argv[3]), "-rev", argv[4], false);
+            }
         }
     }break;
     case 1:{// Comparison mode
