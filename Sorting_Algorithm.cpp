@@ -134,7 +134,7 @@ string Algorithm_Option(string key, bool just_name, clock_t &timer, int &compari
         al_name = "Radix sort";
         if(just_name) return al_name;
         start = clock();
-        radixSort(a, n);
+        radixSort(a, n, comparison);
         end = clock();
     }break;
     case Flash:{
