@@ -13,7 +13,7 @@
 #include "Shell_Sort.h"
 using namespace std;
 
-enum Mode{a, c};
+enum Mode{a, c, e};
 enum Algorithm{
     Selection, Insertion, Bubble, Shaker, Shell, 
     Heap, Merge, Quick,
@@ -29,6 +29,7 @@ static map<string, Output> output;
 void Init_Mode(){
     mode["-a"] = a;
     mode["-c"] = c;
+    mode["-e"] = e;
 }
 
 void Init_Algorithm(){
@@ -58,8 +59,7 @@ void Init_Order(){
 void Init_Output(){
     output["-time"] = _time;
     output["-comp"] = _comp;
-    output["-both"] = _both;
-    
+    output["-both"] = _both;   
 }
 
 string Algorithm_Option(string key, bool just_name, clock_t &timer, int &comparison, int a[] = nullptr, int n = 0){
@@ -234,7 +234,6 @@ void Algorithm_Mode(string al, string input_file, int input_size, string input_o
         }
         inp.close();
     }
-
     delete a;
 }
 
@@ -276,6 +275,9 @@ int main(int argc, char* argv[]){
         }
     }break;
     case 1:{// Comparison mode
+        cout << "COMPARISON MODE" << endl;
+    }break;
+    case 2:{// Experiment mode
         cout << "COMPARISON MODE" << endl;
     }break;
     default:
