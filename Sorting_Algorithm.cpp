@@ -155,25 +155,6 @@ string Algorithm_Option(string key, bool just_name, clock_t &timer, int &compari
     return al_name;
 }
 
-void Output_Option(string out_parameter, const clock_t timer, int comparison){
-    switch (output[out_parameter])
-    {
-    case _time:{
-        cout << "Running time: " << (double)timer << endl;
-    }break;
-    case _comp:{
-        cout << "Comparison: " << comparison << endl;
-    }break;
-    case _both:{
-        cout << "Running time: " << (double)timer << endl;
-        cout << "Comparison: " << comparison << endl;
-    }break;
-    
-    default:
-        break;
-    }
-}
-
 string Input_Order(string input_order){
     string name;
     switch (order[input_order])
@@ -192,6 +173,26 @@ string Input_Order(string input_order){
     }break;
     }
     return name;
+}
+
+//Algorithm mode ------------------------------------------
+void Output_Option(string out_parameter, const clock_t timer, int comparison){
+    switch (output[out_parameter])
+    {
+    case _time:{
+        cout << "Running time: " << (double)timer << endl;
+    }break;
+    case _comp:{
+        cout << "Comparison: " << comparison << endl;
+    }break;
+    case _both:{
+        cout << "Running time: " << (double)timer << endl;
+        cout << "Comparison: " << comparison << endl;
+    }break;
+    
+    default:
+        break;
+    }
 }
 
 void Algorithm_Mode(string al, string input_file, int input_size, string input_order,string out_parameter, bool exist){
@@ -236,6 +237,9 @@ void Algorithm_Mode(string al, string input_file, int input_size, string input_o
     }
     delete a;
 }
+//Comparison mode ------------------------------------------
+
+//Experiment mode ------------------------------------------
 
 int main(int argc, char* argv[]){ 
     Init_Mode();
@@ -278,7 +282,7 @@ int main(int argc, char* argv[]){
         cout << "COMPARISON MODE" << endl;
     }break;
     case 2:{// Experiment mode
-        cout << "COMPARISON MODE" << endl;
+        cout << "EXPERIMENT MODE" << endl;
     }break;
     default:
         break;
