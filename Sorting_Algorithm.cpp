@@ -7,6 +7,7 @@
 
 #include "DataGenerator.h"
 #include "Radix_Sort.h"
+#include "Counting_Sort.h"
 using namespace std;
 
 enum Mode{a, c};
@@ -127,7 +128,7 @@ string Algorithm_Option(string key, bool just_name, clock_t &timer, int &compari
         al_name = "Counting sort";
         if(just_name) return al_name;
         start = clock();
-        // call Counting_sort
+        countingSort(a, n, comparison);
         end = clock();
     }break;
     case Radix:{
