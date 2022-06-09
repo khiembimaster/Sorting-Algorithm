@@ -1,4 +1,4 @@
-void shakerSort(int a[], int size, int &comparison = 0) {
+void shakerSort(int a[], int n, int &comparison) {
 	int first = 0; //First element in the array
 	int last = n - 1; //Last element in the array
 	int k = 0;
@@ -19,7 +19,7 @@ void shakerSort(int a[], int size, int &comparison = 0) {
 		last = k;
 
         //Bring the smallest value to the leftside of the array
-		for (i = last; i > first; i--)
+		for (int i = last; i > first; i--)
 		{
             comparison++;
 			if (a[i] < a[i - 1])

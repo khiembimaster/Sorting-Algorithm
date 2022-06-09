@@ -1,5 +1,5 @@
 //Biến "comparison" ban đầu sẽ được truyền giá trị là 0
-void quickSort(int arr[], int first, int last, int &comparison = 0) {
+void quickSort(int arr[], int first, int last, int &comparison) {
     int pivot = arr[(first + last) / 2];
     int i = first, j = last;
 
@@ -23,11 +23,11 @@ void quickSort(int arr[], int first, int last, int &comparison = 0) {
 
     if (first < j) { //count as one comparison
         comparison++;
-        QuickSort(arr, first, j, comparison);
+        quickSort(arr, first, j, comparison);
     }
 
     if (i < last) { //count as one comparison
         comparison++;
-        QuickSort(arr, i, last, comparison);
+        quickSort(arr, i, last, comparison);
     }
 }
