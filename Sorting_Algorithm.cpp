@@ -221,6 +221,16 @@ void Algorithm_Mode(string al, string input_file, int input_size, string input_o
     cout << "---------------------------" << endl;
     Output_Option(out_parameter, timer, comparison);
     cout << "\n\n";
+
+    if(exist){
+        fstream inp("output.txt", ios::out);
+        inp << input_size << endl;
+        for(int i = 0; i < input_size; i++){
+            inp << a[i] << " ";
+        }
+        inp.close();
+    }
+
     delete a;
 }
 
