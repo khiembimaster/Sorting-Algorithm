@@ -11,6 +11,7 @@
 #include "Radix_Sort.h" 
 #include "Shaker_Sort.h"
 #include "Shell_Sort.h"
+#include "Flash_Sort.h"
 using namespace std;
 
 enum Mode{a, c, e};
@@ -145,7 +146,7 @@ string Algorithm_Option(string key, bool just_name, clock_t &timer, int &compari
         al_name = "Flash sort";
         if(just_name) return al_name;
         start = clock();
-        // call Flash_sort
+        flashSort(a, n, comparison);
         end = clock();
     }break;
     default:
