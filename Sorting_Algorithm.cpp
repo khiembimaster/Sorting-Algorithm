@@ -5,9 +5,12 @@
 #include <fstream>
 #include <cstring>
 
-#include "DataGenerator.h"
-#include "Radix_Sort.h"
 #include "Counting_Sort.h"
+#include "DataGenerator.h"
+#include "Quick_Sort.h"
+#include "Radix_Sort.h" 
+#include "Shaker_Sort.h"
+#include "Shell_Sort.h"
 using namespace std;
 
 enum Mode{a, c};
@@ -91,14 +94,14 @@ string Algorithm_Option(string key, bool just_name, clock_t &timer, int &compari
         al_name = "Shaker sort";
         if(just_name) return al_name;
         start = clock();
-        // call Shaker_sort
+        shakerSort(a, n, comparison);
         end = clock();
     }break;
     case Shell:{
         al_name = "Shell sort";
         if(just_name) return al_name;
         start = clock();
-        // call Shell_sort
+        shellSort(a, n, comparison);
         end = clock();
     }break;
 // Heap, Merge, Quick,
@@ -120,7 +123,7 @@ string Algorithm_Option(string key, bool just_name, clock_t &timer, int &compari
         al_name = "Quick sort";
         if(just_name) return al_name;
         start = clock();
-        // call Quick_sort
+        quickSort(a, 0, n-1, comparison); //0: first element in the array, n-1: last element in the array
         end = clock();
     }break;
 // Counting, Radix, Flash
