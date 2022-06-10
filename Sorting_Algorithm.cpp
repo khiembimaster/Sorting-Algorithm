@@ -217,7 +217,7 @@ string Algorithm_Option(string key, bool just_name, clock_t &timer, int &compari
     default:
         break;
     }
-    timer = (end - start) / CLOCKS_PER_SEC;
+    timer = (end - start);
     return al_name;
 }
 
@@ -336,40 +336,45 @@ void Algorithm_Mode(string al, string input_file, int input_size, string input_o
 // Comparison mode ------------------------------------------
 void Comparsion_mode(string algo1, string algo2, string inputFile, int inSize, string inOrder, bool exist)
 {
-    int *a;
+    int *a1;
+    int *a2;
     if (exist)
     {
         fstream fin;
         fin.open(inputFile, ios::in);
         {
             fin >> inSize;
-            a = new int[inSize];
+            a1 = new int[inSize];
+            a2 = new int[inSize];
             for (int i = 0; i < inSize; i++)
             {
-                fin >> a[i];
+                fin >> a1[i];
+                a2[i] = a1[i];
             }
         }
         fin.close();
     }
     else
     {
-        a = new int[inSize];
-        GenerateData(a, inSize, order[inOrder]);
+        a1 = new int[inSize];
+        a2 = new int[inSize];
+        GenerateData(a1, inSize, order[inOrder]);
         fstream fout;
         fout.open(inputFile, ios::out);
         {
             fout << inSize << endl;
             for (int i = 0; i < inSize; i++)
             {
-                fout << a[i] << " ";
+                fout << a1[i] << " ";
+                a2[i] = a1[i];
             }
         }
         fout.close();
     }
     clock_t time1, time2;
     int comparision1, comparision2;
-    Algorithm_Option(algo1, false, time1, comparision1, a, inSize);
-    Algorithm_Option(algo2, false, time2, comparision2, a, inSize);
+    Algorithm_Option(algo1, false, time1, comparision1, a1, inSize);
+    Algorithm_Option(algo2, false, time2, comparision2, a2, inSize);
     if (exist == false)
     {
         cout << "Input order: " << Input_Order(inOrder) << endl;
@@ -382,12 +387,12 @@ void Comparsion_mode(string algo1, string algo2, string inputFile, int inSize, s
         fout.open("output.txt",ios::out);
         fout<<inSize<<endl;
         for(int i=0;i<inSize;i++){
-            fout<<a[i]<<" ";
+            fout<<a1[i]<<" ";
         }
         fout.close();
-
     }
-    delete a;
+    delete[] a1;
+    delete[] a2;
 }
 
 // Experiment mode ------------------------------------------

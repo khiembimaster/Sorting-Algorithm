@@ -36,7 +36,7 @@ void flashSort(int arr[], int n, int &count_comp){
         }
         flash = arr[j];
         while((++count_comp) && (j != l[k])){
-            k = (m-1)*(arr[j]-min)/(max-min);
+            k = (m-1)*(flash-min)/(max-min);
             hold = arr[t = --l[k]];
             arr[t] = flash;
             flash = hold;
