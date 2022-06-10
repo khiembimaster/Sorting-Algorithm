@@ -111,7 +111,7 @@ string Algorithm_Option(string key, bool just_name, clock_t &timer, int &compari
         if (just_name)
             return al_name;
         start = clock();
-        // call Selection_sort
+        selectionSort(a,n,comparison);
         end = clock();
     }
     break;
@@ -121,7 +121,7 @@ string Algorithm_Option(string key, bool just_name, clock_t &timer, int &compari
         if (just_name)
             return al_name;
         start = clock();
-        // call Insertion_sort
+        insertionSort(a,n,comparison);
         end = clock();
     }
     break;
@@ -131,7 +131,7 @@ string Algorithm_Option(string key, bool just_name, clock_t &timer, int &compari
         if (just_name)
             return al_name;
         start = clock();
-        // call Bubble_sort
+        bubbleSort(a,n,comparison);
         end = clock();
     }
     break;
