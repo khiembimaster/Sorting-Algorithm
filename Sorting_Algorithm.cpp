@@ -331,7 +331,7 @@ void Algorithm_Mode(string al, string input_file, int input_size, string input_o
         }
         inp.close();
     }
-    delete a;
+    delete[] a;
 }
 // Comparison mode ------------------------------------------
 void Comparsion_mode(string algo1, string algo2, string inputFile, int inSize, string inOrder, bool exist)
