@@ -4,30 +4,15 @@ void quickSort(int arr[], int first, int last, int &comparison) {
     int i = first, j = last;
 
     do {
-        while (arr[i] < pivot) { //count as one comparison
-            comparison++; 
-            i++;
-        }
+        while (++comparison && arr[i] < pivot) i++;
+        while (++comparison && arr[j] > pivot) j--;
 
-        while (arr[j] > pivot) { //count as one comparison
-            comparison++; 
-            j--;
-        }
-
-        if (i <= j) { //count as one comparison
-            comparison++; 
+        if (++comparison && i <= j) { //count as one comparison
             swap(arr[i], arr[j]);
             i++; j--;
         }
-    } while (i < j && ++comparison); //count as one comparison
+    } while (++comparison && i < j); //count as one comparison
 
-    if (first < j) { //count as one comparison
-        comparison++;
-        quickSort(arr, first, j, comparison);
-    }
-
-    if (i < last) { //count as one comparison
-        comparison++;
-        quickSort(arr, i, last, comparison);
-    }
+    if (++comparison && first < j) quickSort(arr, first, j, comparison);
+    if (++comparison && i < last) quickSort(arr, i, last, comparison);
 }

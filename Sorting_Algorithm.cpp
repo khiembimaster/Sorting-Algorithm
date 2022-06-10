@@ -182,6 +182,7 @@ string Algorithm_Option(string key, bool just_name, clock_t &timer, int &compari
         if (just_name)
             return al_name;
         start = clock();
+        comparison = 0; //Because quickSort is a recursive function so assign value 0 to the variable comparison here for safety.
         quickSort(a, 0, n - 1, comparison); // 0: first element in the array, n-1: last element in the array
         end = clock();
     }

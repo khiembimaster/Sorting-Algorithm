@@ -3,15 +3,13 @@ void shakerSort(int a[], int n, int &comparison) {
 	int last = n - 1; //Last element in the array
 	int k = 0;
 
-	while (first < last && ++comparison)
+	while (++comparison && first < last)
 	{
         //Bring the largest value to the rightside of the array
-		for (int i = first; i < last; i++)
+		for (int i = first; ++comparison && i < last; i++)
 		{
-            comparison++;
-			if (a[i] > a[i + 1])
+			if (++comparison && a[i] > a[i + 1])
 			{
-                comparison++;
 				swap(a[i], a[i + 1]);
 				k = i;
 			}
@@ -19,12 +17,10 @@ void shakerSort(int a[], int n, int &comparison) {
 		last = k;
 
         //Bring the smallest value to the leftside of the array
-		for (int i = last; i > first; i--)
+		for (int i = last; ++comparison && i > first; i--)
 		{
-            comparison++;
-			if (a[i] < a[i - 1])
+			if (++comparison && a[i] < a[i - 1])
 			{
-                comparison++;
 				swap(a[i], a[i - 1]);
 				k = i;
 			}
