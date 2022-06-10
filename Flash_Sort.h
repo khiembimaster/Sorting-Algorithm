@@ -1,20 +1,19 @@
 void flashSort(int arr[], int n, int &count_comp){
 //CLASSIFICATION
-    int m = 0.45 * float(n);
+    int m = float(0.45 * n);
     //Create vector l
-    int *l = new int[m];
-    for(int i = 0;(++count_comp) && (i < m); i++){
-        l[i] = 0;
-    }
+    int *l = new int[m]{0};
+        
     //Find max and min
     int max = arr[0], min = arr[0]; 
     for(int i = 1;(++count_comp) && (i < n); i++){
         if((++count_comp) && (arr[i] < min)) min = arr[i];
         if((++count_comp) && (arr[i] > max)) max = arr[i];
     }
+    float c1 = (m-1)/(max-min);
     //Store numbers of elements in each class l[k]
     for(int i = 0;(++count_comp) && (i < n); i++){
-        int k = (m-1)*(arr[i]-min)/(max-min);
+        int k = c1*(arr[i]-min);
         l[k]++;
     }
     //// accumulate sum of l[k]
@@ -28,22 +27,21 @@ void flashSort(int arr[], int n, int &count_comp){
     int k = 0;
     int t = 0;
     int j = 0;
-
-    while((++count_comp) && (move < n-1)){
+    while((++count_comp) && (move < (n-1))){
         while((++count_comp) && (j > (l[k] - 1))){
             j++;
-            k = (m-1)*(arr[j]-min)/(max-min);
+            k = c1*(arr[j]-min);
         }
         flash = arr[j];
         while((++count_comp) && (j != l[k])){
-            k = (m-1)*(flash-min)/(max-min);
+            k = c1*(flash-min);
             hold = arr[t = --l[k]];
             arr[t] = flash;
             flash = hold;
             move++;
         }
     }
-
+    delete[] l;
 //INSERTION SORT
     for(int i = 1;(++count_comp) && (i < n); i++){
         int p = arr[i];
@@ -54,5 +52,5 @@ void flashSort(int arr[], int n, int &count_comp){
         }
         arr[j+1] = p;
     }
-    delete l;
+    return;
 }
