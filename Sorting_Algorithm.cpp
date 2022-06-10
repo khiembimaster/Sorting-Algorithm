@@ -15,6 +15,8 @@
 #include "Selection_Sort.h"
 #include "Insertion_Sort.h"
 #include "Bubble_Sort.h"
+#include "heap_sort.h"
+#include "Merge_Sort.h"
 using namespace std;
 
 enum Mode
@@ -162,7 +164,7 @@ string Algorithm_Option(string key, bool just_name, clock_t &timer, int &compari
         if (just_name)
             return al_name;
         start = clock();
-        // call Heap_sort
+        heapSort(a,n,comparison);
         end = clock();
     }
     break;
@@ -172,7 +174,7 @@ string Algorithm_Option(string key, bool just_name, clock_t &timer, int &compari
         if (just_name)
             return al_name;
         start = clock();
-        // call Merge_sort
+        mergeSort(a,0,n-1,comparison);
         end = clock();
     }
     break;

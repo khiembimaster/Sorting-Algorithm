@@ -14,7 +14,7 @@ Sorted
 			Running time: 0
 		Algorithm: Shell sort
 			Comparisons: 390021
-			Running time: 1
+			Running time: 2
 		Algorithm: Heap sort
 			Comparisons: 0
 			Running time: 0
@@ -23,16 +23,16 @@ Sorted
 			Running time: 0
 		Algorithm: Quick sort
 			Comparisons: 420013
-			Running time: 1
+			Running time: 2
 		Algorithm: Counting sort
 			Comparisons: 180004
-			Running time: 1
+			Running time: 0
 		Algorithm: Radix sort
 			Comparisons: 360186
-			Running time: 1
+			Running time: 3
 		Algorithm: Flash sort
 			Comparisons: 313498
-			Running time: 2
+			Running time: 1
 
 	50000
 		Algorithm: Selection sort
@@ -46,10 +46,10 @@ Sorted
 			Running time: 0
 		Algorithm: Shaker sort
 			Comparisons: 50000
-			Running time: 0
+			Running time: 1
 		Algorithm: Shell sort
 			Comparisons: 700021
-			Running time: 2
+			Running time: 4
 		Algorithm: Heap sort
 			Comparisons: 0
 			Running time: 0
@@ -58,13 +58,13 @@ Sorted
 			Running time: 0
 		Algorithm: Quick sort
 			Comparisons: 750014
-			Running time: 1
+			Running time: 2
 		Algorithm: Counting sort
 			Comparisons: 300004
-			Running time: 0
+			Running time: 1
 		Algorithm: Radix sort
 			Comparisons: 600186
-			Running time: 2
+			Running time: 5
 		Algorithm: Flash sort
 			Comparisons: 522498
 			Running time: 2

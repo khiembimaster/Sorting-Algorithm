@@ -10,11 +10,11 @@ Nearly Sorted
 			Comparisons: 0
 			Running time: 0
 		Algorithm: Shaker sort
-			Comparisons: 284875
+			Comparisons: 428675
 			Running time: 2
 		Algorithm: Shell sort
-			Comparisons: 496845
-			Running time: 2
+			Comparisons: 531665
+			Running time: 4
 		Algorithm: Heap sort
 			Comparisons: 0
 			Running time: 0
@@ -26,12 +26,12 @@ Nearly Sorted
 			Running time: 1
 		Algorithm: Counting sort
 			Comparisons: 180004
-			Running time: 0
+			Running time: 1
 		Algorithm: Radix sort
 			Comparisons: 360186
 			Running time: 2
 		Algorithm: Flash sort
-			Comparisons: 530946
+			Comparisons: 694318
 			Running time: 2
 
 	50000
@@ -45,11 +45,11 @@ Nearly Sorted
 			Comparisons: 0
 			Running time: 0
 		Algorithm: Shaker sort
-			Comparisons: 507169
-			Running time: 2
+			Comparisons: 584871
+			Running time: 3
 		Algorithm: Shell sort
-			Comparisons: 848765
-			Running time: 2
+			Comparisons: 885349
+			Running time: 4
 		Algorithm: Heap sort
 			Comparisons: 0
 			Running time: 0
@@ -58,14 +58,14 @@ Nearly Sorted
 			Running time: 0
 		Algorithm: Quick sort
 			Comparisons: 750014
-			Running time: 2
+			Running time: 3
 		Algorithm: Counting sort
 			Comparisons: 300004
 			Running time: 1
 		Algorithm: Radix sort
 			Comparisons: 600186
-			Running time: 3
+			Running time: 4
 		Algorithm: Flash sort
-			Comparisons: 958154
-			Running time: 3
+			Comparisons: 1017370
+			Running time: 4
 
