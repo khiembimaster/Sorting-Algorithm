@@ -64,27 +64,27 @@ void Init_Mode()
 void Init_Algorithm()
 {
     // O(N^2)
-    algorithm["selection-sort"] = Selection;
-    algorithm["insertion-sort"] = Insertion;
-    algorithm["bubble-sort"] = Bubble;
-    algorithm["shaker-sort"] = Shaker;
-    algorithm["shell-sort"] = Shell;
+    algorithm["selection-sort"] = Selection; algorithm["0"] = Selection;
+    algorithm["insertion-sort"] = Insertion; algorithm["1"] = Insertion;
+    algorithm["bubble-sort"] = Bubble; algorithm["2"] = Bubble;
+    algorithm["shaker-sort"] = Shaker; algorithm["3"] = Shaker;
+    algorithm["shell-sort"] = Shell; algorithm["4"] = Shell;
     // O(Nlogn)
-    algorithm["heap-sort"] = Heap;
-    algorithm["merge-sort"] = Merge;
-    algorithm["quick-sort"] = Quick;
+    algorithm["heap-sort"] = Heap; algorithm["5"] = Heap;
+    algorithm["merge-sort"] = Merge; algorithm["6"] = Merge;
+    algorithm["quick-sort"] = Quick; algorithm["7"] = Quick;
     // O(N)
-    algorithm["counting-sort"] = Counting;
-    algorithm["radix-sort"] = Radix;
-    algorithm["flash-sort"] = Flash;
+    algorithm["counting-sort"] = Counting; algorithm["8"] = Counting;
+    algorithm["radix-sort"] = Radix; algorithm["9"] = Radix;
+    algorithm["flash-sort"] = Flash; algorithm["10"] = Flash;
 }
 
 void Init_Order()
 {
-    order["-rand"] = _rand;
-    order["-nsorted"] = _nsorted;
-    order["-sorted"] = _sorted;
-    order["-rev"] = _rev;
+    order["-rand"] = _rand; order["0"] = _rand;
+    order["-nsorted"] = _nsorted; order["1"] = _nsorted;
+    order["-sorted"] = _sorted; order["2"] = _sorted;
+    order["-rev"] = _rev; order["3"] = _rev;
 }
 
 void Init_Output()
@@ -396,6 +396,40 @@ void Comparsion_mode(string algo1, string algo2, string inputFile, int inSize, s
 }
 
 // Experiment mode ------------------------------------------
+void Experiment_mode(){
+    int dataSize[]{30'000, 50'000, 100'000, 300'000, 500'000};
+    int *a;
+    
+    string index = "0";
+    string s_index = "0";
+    fstream fs;
+    for(int i = 0; i < 4; i++){
+        string outputfile = "output_.txt";
+        index = to_string(i);
+        outputfile.insert(7,index); 
+        fs.open(outputfile, ios::out);
+        fs << Input_Order(index) << endl;                 
+        for(int j = 0; j < 2; j++){
+            int n = dataSize[j];
+            fs << "\t" << n << endl;
+            for(int sort = 0; sort < 11; sort++){
+                a = new int[n];
+                GenerateData(a, n, i);
+                clock_t timer;
+                int comparison;
+                s_index = to_string(sort);
+                string temp = Algorithm_Option(s_index, false, timer, comparison, a, n);
+                delete a;
+                //Write data
+                fs << "\t\tAlgorithm: " << temp << endl
+                    << "\t\t\t" << "Comparisons: " << comparison << endl
+                    << "\t\t\t" << "Running time: " << timer << endl;
+            }
+            fs << endl;
+        }
+        fs.close();
+    }
+}
 
 int main(int argc, char *argv[])
 {
@@ -404,7 +438,8 @@ int main(int argc, char *argv[])
     Init_Order();
     Init_Output();
 
-    switch (mode[argv[1]])
+    int x = 2;
+    switch (x)
     {
     case 0:
     { // Algorithm mode
@@ -468,6 +503,7 @@ int main(int argc, char *argv[])
     case 2:
     { // Experiment mode
         cout << "EXPERIMENT MODE" << endl;
+        Experiment_mode();
     }
     break;
     default:

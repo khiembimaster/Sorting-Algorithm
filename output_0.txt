@@ -1,0 +1,71 @@
+Randomize
+	30000
+		Algorithm: Selection sort
+			Comparisons: 0
+			Running time: 0
+		Algorithm: Insertion sort
+			Comparisons: 0
+			Running time: 0
+		Algorithm: Bubble sort
+			Comparisons: 0
+			Running time: 0
+		Algorithm: Shaker sort
+			Comparisons: 522706406
+			Running time: 2436
+		Algorithm: Shell sort
+			Comparisons: 1516851
+			Running time: 5
+		Algorithm: Heap sort
+			Comparisons: 0
+			Running time: 0
+		Algorithm: Merge sort
+			Comparisons: 0
+			Running time: 0
+		Algorithm: Quick sort
+			Comparisons: 595758
+			Running time: 3
+		Algorithm: Counting sort
+			Comparisons: 180004
+			Running time: 1
+		Algorithm: Radix sort
+			Comparisons: 360186
+			Running time: 2
+		Algorithm: Flash sort
+			Comparisons: 451959444
+			Running time: 970
+
+	50000
+		Algorithm: Selection sort
+			Comparisons: 0
+			Running time: 0
+		Algorithm: Insertion sort
+			Comparisons: 0
+			Running time: 0
+		Algorithm: Bubble sort
+			Comparisons: 0
+			Running time: 0
+		Algorithm: Shaker sort
+			Comparisons: 1452119127
+			Running time: 6810
+		Algorithm: Shell sort
+			Comparisons: 3046771
+			Running time: 9
+		Algorithm: Heap sort
+			Comparisons: 0
+			Running time: 0
+		Algorithm: Merge sort
+			Comparisons: 0
+			Running time: 0
+		Algorithm: Quick sort
+			Comparisons: 1065819
+			Running time: 7
+		Algorithm: Counting sort
+			Comparisons: 282772
+			Running time: 1
+		Algorithm: Radix sort
+			Comparisons: 600186
+			Running time: 3
+		Algorithm: Flash sort
+			Comparisons: 1249415005
+			Running time: 2677
+
