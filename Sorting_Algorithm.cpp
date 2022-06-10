@@ -409,7 +409,7 @@ void Experiment_mode(){
         outputfile.insert(7,index); 
         fs.open(outputfile, ios::out);
         fs << Input_Order(index) << endl;                 
-        for(int j = 0; j < 2; j++){
+        for(int j = 0; j < 5; j++){
             int n = dataSize[j];
             fs << "\t" << n << endl;
             for(int sort = 0; sort < 11; sort++){
