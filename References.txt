@@ -1,1 +1,10 @@
+#SOLUTION FOR FAST CALLING ALGORITHM
 https://www.codeguru.com/cplusplus/switch-on-strings-in-c/
+
+#FLASH SORT
+https://codelearn.io/sharing/flash-sort-thuat-toan-sap-xep-than-thanh
+https://www.drdobbs.com/database/the-flashsort1-algorithm/184410496
+https://www.youtube.com/watch?v=CAaDJJUszvE
+
+#COUNTING SORT - RADIX SORT
+"slide bài giảng"
