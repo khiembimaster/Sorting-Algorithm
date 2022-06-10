@@ -1,4 +1,4 @@
-void shakerSort(int a[], int n, int &comparison) {
+void shakerSort(int a[], int n, unsigned long long &comparison) {
 	int first = 0; //First element in the array
 	int last = n - 1; //Last element in the array
 	int k = 0;

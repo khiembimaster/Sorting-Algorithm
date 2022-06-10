@@ -1,4 +1,4 @@
-void shellSort(int arr[], int size, int &comparison)
+void shellSort(int arr[], int size, unsigned long long &comparison)
 {
     comparison = 0;
     // Start with a big gap, then reduce the gap

@@ -1,71 +1,176 @@
 Nearly Sorted
 	30000
 		Algorithm: Selection sort
-			Comparisons: 0
-			Running time: 0
+			Comparisons: 900029999
+			Running time: 2108
 		Algorithm: Insertion sort
-			Comparisons: 0
+			Comparisons: 676306
 			Running time: 0
 		Algorithm: Bubble sort
-			Comparisons: 0
-			Running time: 0
+			Comparisons: 900029999
+			Running time: 2153
 		Algorithm: Shaker sort
-			Comparisons: 428675
+			Comparisons: 438647
 			Running time: 2
 		Algorithm: Shell sort
-			Comparisons: 531665
+			Comparisons: 1307040
 			Running time: 4
 		Algorithm: Heap sort
-			Comparisons: 0
-			Running time: 0
+			Comparisons: 1739658
+			Running time: 4
 		Algorithm: Merge sort
-			Comparisons: 0
-			Running time: 0
+			Comparisons: 86871
+			Running time: 11
 		Algorithm: Quick sort
-			Comparisons: 420013
-			Running time: 1
+			Comparisons: 485582
+			Running time: 0
 		Algorithm: Counting sort
 			Comparisons: 180004
-			Running time: 1
+			Running time: 0
 		Algorithm: Radix sort
 			Comparisons: 360186
-			Running time: 2
+			Running time: 0
 		Algorithm: Flash sort
-			Comparisons: 694318
-			Running time: 2
+			Comparisons: 659358
+			Running time: 0
 
 	50000
 		Algorithm: Selection sort
-			Comparisons: 0
-			Running time: 0
+			Comparisons: 2500049999
+			Running time: 5908
 		Algorithm: Insertion sort
-			Comparisons: 0
-			Running time: 0
+			Comparisons: 525830
+			Running time: 2
 		Algorithm: Bubble sort
-			Comparisons: 0
-			Running time: 0
+			Comparisons: 2500049999
+			Running time: 6010
 		Algorithm: Shaker sort
-			Comparisons: 584871
-			Running time: 3
+			Comparisons: 626430
+			Running time: 0
 		Algorithm: Shell sort
-			Comparisons: 885349
-			Running time: 4
+			Comparisons: 2279362
+			Running time: 0
 		Algorithm: Heap sort
-			Comparisons: 0
-			Running time: 0
+			Comparisons: 3056417
+			Running time: 21
 		Algorithm: Merge sort
-			Comparisons: 0
-			Running time: 0
+			Comparisons: 131730
+			Running time: 19
 		Algorithm: Quick sort
-			Comparisons: 750014
-			Running time: 3
+			Comparisons: 881127
+			Running time: 0
 		Algorithm: Counting sort
 			Comparisons: 300004
-			Running time: 1
+			Running time: 0
 		Algorithm: Radix sort
 			Comparisons: 600186
-			Running time: 4
+			Running time: 0
 		Algorithm: Flash sort
-			Comparisons: 1017370
+			Comparisons: 1003506
+			Running time: 12
+
+	100000
+		Algorithm: Selection sort
+			Comparisons: 10000099999
+			Running time: 24506
+		Algorithm: Insertion sort
+			Comparisons: 758438
+			Running time: 2
+		Algorithm: Bubble sort
+			Comparisons: 10000099999
+			Running time: 24382
+		Algorithm: Shaker sort
+			Comparisons: 498054
+			Running time: 2
+		Algorithm: Shell sort
+			Comparisons: 4618002
+			Running time: 11
+		Algorithm: Heap sort
+			Comparisons: 6519776
+			Running time: 28
+		Algorithm: Merge sort
+			Comparisons: 250005
+			Running time: 34
+		Algorithm: Quick sort
+			Comparisons: 1862184
 			Running time: 4
+		Algorithm: Counting sort
+			Comparisons: 600004
+			Running time: 3
+		Algorithm: Radix sort
+			Comparisons: 1200186
+			Running time: 7
+		Algorithm: Flash sort
+			Comparisons: 1277002
+			Running time: 5
+
+	300000
+		Algorithm: Selection sort
+			Comparisons: 90000299999
+			Running time: 213352
+		Algorithm: Insertion sort
+			Comparisons: 1463954
+			Running time: 15
+		Algorithm: Bubble sort
+			Comparisons: 90000299999
+			Running time: 211698
+		Algorithm: Shaker sort
+			Comparisons: 1016870
+			Running time: 0
+		Algorithm: Shell sort
+			Comparisons: 15440578
+			Running time: 31
+		Algorithm: Heap sort
+			Comparisons: 21431685
+			Running time: 94
+		Algorithm: Merge sort
+			Comparisons: 750005
+			Running time: 110
+		Algorithm: Quick sort
+			Comparisons: 5889344
+			Running time: 16
+		Algorithm: Counting sort
+			Comparisons: 1800004
+			Running time: 9
+		Algorithm: Radix sort
+			Comparisons: 4200221
+			Running time: 23
+		Algorithm: Flash sort
+			Comparisons: 3558746
+			Running time: 15
+
+	500000
+		Algorithm: Selection sort
+			Comparisons: 250000499999
+			Running time: 578317
+		Algorithm: Insertion sort
+			Comparisons: 1945494
+			Running time: 0
+		Algorithm: Bubble sort
+			Comparisons: 250000499999
+			Running time: 585358
+		Algorithm: Shaker sort
+			Comparisons: 1396210
+			Running time: 0
+		Algorithm: Shell sort
+			Comparisons: 25647719
+			Running time: 63
+		Algorithm: Heap sort
+			Comparisons: 37116188
+			Running time: 157
+		Algorithm: Merge sort
+			Comparisons: 1250005
+			Running time: 188
+		Algorithm: Quick sort
+			Comparisons: 10048626
+			Running time: 31
+		Algorithm: Counting sort
+			Comparisons: 3000004
+			Running time: 17
+		Algorithm: Radix sort
+			Comparisons: 7000221
+			Running time: 31
+		Algorithm: Flash sort
+			Comparisons: 5765730
+			Running time: 31
 

@@ -1,0 +1,24 @@
+1.Idea
+//-----------------------
+The main idea of flashSort algorithm is to classify elements into smaller buckets/classes, which is also used to gain the O(n) performances of countingSort, radixSort and ,especially, bucketSort.
+Then flashSort in-place permutes elements into their approriate buckets to turn the original array into a nearly sorted one. Intentionally, This distribution of elements is insertionSort's best case, which is order of O(n). 
+//-----------------------
+The flashSort consists of three logical blocks: classification, permutation, and straight insertion.
+    Classification determines the size of each class of elements. 
+    Permutation does long-range(the whole array) reordering to collect elements of each class together. 
+    Straight insertion does the final short-range(each small buckets) ordering.
+//=======================
+2.Step-by-step description
+//-----------------------
+a.Classification
+Let m is the floor of multiplication of a constant(0.45) and the number of elements(n).
+Then create an array(l) of m elements to store the size of every classes.
+Find the max and min values.
+Let k be the index of each buckets, that 
+    (1) k = [(m - 1) / (max - min)] * (arr[i] - min)
+    The result k will be a value from 0 to m-1
+    //min-------arr[i]---------------max
+    (*) In the source code, i'm using variable c1 = [(m - 1) / (max - min)]
+    (2) Now k = c1 * (arr[i] - min)
+    Since, using (1) to calculate k, the calculation will ask for additional memories, which cause the previous version using (1) method to crash when the input size is over 100'000. 
+    Thus, (2) helps enormously improve the performances than (1) does.

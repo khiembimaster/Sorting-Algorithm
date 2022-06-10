@@ -1,4 +1,4 @@
-void insertionSort(int arr[], int n, int &count_compare)
+void insertionSort(int arr[], int n, unsigned long long &count_compare)
 {
     int i, key, j;
     for (i = 1; (++count_compare) && (i < n); i++)

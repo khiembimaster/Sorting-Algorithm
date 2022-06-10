@@ -1,4 +1,4 @@
-void radixSort(int arr[], int n, int &count_comp){
+void radixSort(int arr[], int n, unsigned long long &count_comp){
     count_comp = 0;
     int max_val = arr[0]; // get maximum value in the array
     for (int i = 1; (++count_comp)&&(i < n); ++i)

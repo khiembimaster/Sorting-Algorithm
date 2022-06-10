@@ -1,4 +1,4 @@
-void flashSort(int arr[], int n, int &count_comp){
+void flashSort(int arr[], int n, unsigned long long &count_comp){
 //CLASSIFICATION
     int m = float(0.45 * n);
     //Create vector l

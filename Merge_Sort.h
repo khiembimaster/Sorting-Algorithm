@@ -1,4 +1,4 @@
-void merge(int arr[], int l, int m, int r,int &comparision) {
+void merge(int arr[], int l, int m, int r, unsigned long long &comparision) {
     comparision=0;
     int i, j, k;
     int n1 = m - l + 1;
@@ -38,7 +38,7 @@ void merge(int arr[], int l, int m, int r,int &comparision) {
         k++;
     }
 }
-void mergeSort(int a[], int l, int r,int &comparision) {
+void mergeSort(int a[], int l, int r, unsigned long long &comparision) {
     if (l < r) {
         int m = l + (r - l) / 2;
         mergeSort(a, l, m,comparision);

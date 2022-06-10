@@ -1,4 +1,4 @@
-    void heapRebuild(int start, int arr[], int n,int &comparision)
+    void heapRebuild(int start, int arr[], int n, unsigned long long &comparision)
 {
     int leftChild = 2 * start + 1;
     if ((++comparision)&&(leftChild >= n))
@@ -16,7 +16,7 @@
         heapRebuild(largerChild, arr, n,comparision);
     }
 }
-void heapSort(int arr[], int n,int &comparision)
+void heapSort(int arr[], int n, unsigned long long &comparision)
 {
     comparision=0;
     for (int index = (n - 1) / 2;(++comparision)&& (index >= 0); index--)

@@ -99,7 +99,7 @@ void Init_Output()
     output["-both"] = _both;
 }
 
-string Algorithm_Option(string key, bool just_name, clock_t &timer, int &comparison, int a[] = nullptr, int n = 0)
+string Algorithm_Option(string key, bool just_name, clock_t &timer, unsigned long long &comparison, int a[] = nullptr, int n = 0)
 {
     string al_name;
     clock_t start, end;
@@ -257,7 +257,7 @@ string Input_Order(string input_order)
 }
 
 // Algorithm mode ------------------------------------------
-void Output_Option(string out_parameter, const clock_t timer, int comparison)
+void Output_Option(string out_parameter, const clock_t timer, long long comparison)
 {
     switch (output[out_parameter])
     {
@@ -282,7 +282,7 @@ void Output_Option(string out_parameter, const clock_t timer, int comparison)
         break;
     }
 }
-void OutputComparision(clock_t time1, clock_t time2, int comparsion1, int comparsion2)
+void OutputComparision(clock_t time1, clock_t time2, long long comparsion1, long long comparsion2)
 {
     cout << "Running time: " << time1 << "|" << time2 << endl;
     cout << "Comparision:  " << comparsion1 << "|" << comparsion2 << endl;
@@ -318,7 +318,7 @@ void Algorithm_Mode(string al, string input_file, int input_size, string input_o
     }
 
     clock_t timer;
-    int comparison;
+    unsigned long long comparison;
 
     string temp = Algorithm_Option(al, false, timer, comparison, a, input_size);
     if (!exist)
@@ -378,7 +378,7 @@ void Comparsion_mode(string algo1, string algo2, string inputFile, int inSize, s
         fout.close();
     }
     clock_t time1, time2;
-    int comparision1, comparision2;
+    unsigned long long comparision1, comparision2;
     Algorithm_Option(algo1, false, time1, comparision1, a1, inSize);
     Algorithm_Option(algo2, false, time2, comparision2, a2, inSize);
     if (exist == false)
@@ -422,10 +422,10 @@ void Experiment_mode(){
                 a = new int[n];
                 GenerateData(a, n, i);
                 clock_t timer;
-                int comparison;
+                unsigned long long comparison;
                 s_index = to_string(sort);
                 string temp = Algorithm_Option(s_index, false, timer, comparison, a, n);
-                delete a;
+                delete[] a;
                 //Write data
                 fs << "\t\tAlgorithm: " << temp << endl
                     << "\t\t\t" << "Comparisons: " << comparison << endl
@@ -449,7 +449,7 @@ int main(int argc, char *argv[])
     case 0:
     { // Algorithm mode
         cout << "ALGORITHM MODE" << endl;
-        int dummy;
+        unsigned long long dummy;
         clock_t dummy_t;
         cout << Algorithm_Option(argv[2], true, dummy_t, dummy) << endl;
         string temp = argv[3];
@@ -484,7 +484,7 @@ int main(int argc, char *argv[])
     case 1:
     { // Comparison mode
         cout << "COMPARISON MODE" << endl;
-        int dummy1, dummy2;
+        unsigned long long dummy1, dummy2;
         clock_t dummy_t1, dummy_t2;
         cout << "Algorithm: " << Algorithm_Option(argv[2], true, dummy_t1, dummy1) << "|"
              << Algorithm_Option(argv[3], true, dummy_t2, dummy2) << endl;

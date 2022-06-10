@@ -1,4 +1,4 @@
-void countingSort(int arr[], int n, int& count_comp){ 
+void countingSort(int arr[], int n, unsigned long long& count_comp){ 
     count_comp = 0;
     // u is the maximum value
     int u = 0;
