@@ -441,8 +441,7 @@ int main(int argc, char *argv[])
     Init_Order();
     Init_Output();
 
-    int x = 2;
-    switch (x)
+    switch (mode[argv[1]])
     {
     case 0:
     { // Algorithm mode
