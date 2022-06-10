@@ -12,6 +12,9 @@
 #include "Shaker_Sort.h"
 #include "Shell_Sort.h"
 #include "Flash_Sort.h"
+#include "Selection_Sort.h"
+#include "Insertion_Sort.h"
+#include "Bubble_Sort.h"
 using namespace std;
 
 enum Mode
