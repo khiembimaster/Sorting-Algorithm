@@ -1,9 +1,12 @@
 1.Idea
 //-----------------------
-The main idea of flashSort algorithm is to classify elements into smaller buckets/classes, which is also used to gain the O(n) performances of countingSort, radixSort and ,especially, bucketSort.
-Then flashSort in-place permutes elements into their approriate buckets to turn the original array into a nearly sorted one. Intentionally, This distribution of elements is insertionSort's best case, which is order of O(n). 
+FlashSort is a classification sorting algorithm such as countingSort, radixSort and ,especially, bucketSort.
+As the result, The main idea of flashSort algorithm is to classify elements into smaller buckets/classes. 
+Then flashSort in-place permutes elements into their approriate buckets, which helps flashSort outweight its counterparts. 
+After the Permutation, the original array becomes a nearly sorted one.
+Intentionally, This distribution of elements is insertionSort's best case, which is order of O(n).
 //-----------------------
-The flashSort consists of three logical blocks: classification, permutation, and straight insertion.
+Overall, The flashSort consists of three logical blocks: classification, permutation, and straight insertion.
     Classification determines the size of each class of elements. 
     Permutation does long-range(the whole array) reordering to collect elements of each class together. 
     Straight insertion does the final short-range(each small buckets) ordering.
@@ -11,14 +14,60 @@ The flashSort consists of three logical blocks: classification, permutation, and
 2.Step-by-step description
 //-----------------------
 a.Classification
-Let m is the floor of multiplication of a constant(0.45) and the number of elements(n).
-Then create an array(l) of m elements to store the size of every classes.
-Find the max and min values.
-Let k be the index of each buckets, that 
-    (1) k = [(m - 1) / (max - min)] * (arr[i] - min)
-    The result k will be a value from 0 to m-1
-    //min-------arr[i]---------------max
-    (*) In the source code, i'm using variable c1 = [(m - 1) / (max - min)]
-    (2) Now k = c1 * (arr[i] - min)
-    Since, using (1) to calculate k, the calculation will ask for additional memories, which cause the previous version using (1) method to crash when the input size is over 100'000. 
-    Thus, (2) helps enormously improve the performances than (1) does.
+In this pharse, the algorithm is finding the amount of buckets-stored by m- and 
+their size-stored by an array l[] with the size of m elements.
+    m will be the floor of multiplication of a constant(0.45) and the number of elements(n).
+
+Assume that the values in bucket[0] <= bucket[1] <= ...<=bucket[k] ...<= bucket[m-1].
+                          
+To find where arr[i] belongs to
+    We, first, find the max and min values by scanning through the arr[].
+    Let arr[i] is an element in the given array
+    Let k be the class of arr[i], that 
+        (1) k(arr[i]) = [(m - 1) / (max - min)] * (arr[i] - min) 
+        (*) In the source code, i'm using variable c1 = [(m - 1) / (max - min)]
+        (2) Now k(arr[i]) = c1 * (arr[i] - min)
+            The result k will be a value from 0 to m-1.
+            This function would help find the bucket arr[i] should be placed.
+            Note:   min--------arr[i]---------------------------------------max
+                    |(arr[i] - min)|
+                    |-----------------(max - min)-----------------------------|
+                    |k = 0||k = 1| ...................................|k = m-1|
+                Divide (m-1) into the distance between max and min equal fields.
+                Each field's size is about c1 = (m-1)/(max-min)
+                So that the field of arr[i]: k = round of [c1 * (distance between arr[i] and min)]
+                                                       or [c1 * (arr[i]-min)]   
+
+
+            Note: Since, using (1) to calculate k, the calculation will ask for additional memories,
+            which cause the previous version using the first(1) method to crash when the input size is over 100'000. 
+            Thus, (2) will help enormously improve the performances than (1) does.
+
+As the main part of this pharse, The second for-loop will scan through all elements, get their k(arr[i]) and sum up the approriate l[k] by one.
+Then it accumulates sum of l[k]. As the result, we have a prefix sum array which help determine where a bucket end.
+**in more detail, the last position of a bucket will be l[k]-1.
+
+b.Permutation
+Here, flashSort assigns elements into the approriate class.
+Clearly, before moving one element-flash = arr[j]- to new location-t = (l[k]-1), we have to move that old one-arr[t]-away. 
+Lets use a variable -hold- to store the value of the removed item.
+We may then calculate its new location -l[k(new-flash)]- and go until nothing is moveable j = l[k].
+Then, if move-variable is still less than n-1 or we can say that every elements are not moved, 
+we will find a value j that arr[j] is not placed at its correct class and continue the above process.
+
+c.Straight insertion
+Finally, we have a mostly sorted array to deal with after the permutation phase has shifted everything into nearly the correct position.
+Thus, it's time to use a simple-comparison-sort algorithm, insertionSort, to arrange each bucket, whose size is constant.
+
+3.Complexity evaluations
+a.Time Complexity
+    T(n) = O(n) = Classification(n)(1) + Permutation(n)(2) + Straight_insertion(n)(3).
+    
+    (1)Classification(n) = O(n) =
+                            scanning the input to find the size of each class = O(n)
+                        +   adding up the class sizes to determine the initial L(K) values = O(m < n)
+                        +   find max and min = O(n) 
+    (2)Permutation(n) = O(n). since Each item is moved once, and j scans through the entire array at most once. 
+    
+    Assuming the classes are about the same size, this requires O((n/m)2) = O(1) time for each class, so that
+    (3)Straight_insertion(n) = O(n)*O(1) = O(n). 
