@@ -1,59 +1,58 @@
 1.Idea
 //-----------------------
-FlashSort is a classification sorting algorithm such as countingSort, radixSort and ,especially, bucketSort.
-As the result, The main idea of flashSort algorithm is to classify elements into smaller buckets/classes. 
-Then flashSort in-place permutes elements into their approriate buckets, which helps flashSort outweight its counterparts. 
-After the Permutation, the original array becomes a nearly sorted one.
-Intentionally, This distribution of elements is insertionSort's best case, which is order of O(n).
+FlashSort is a classification sorting algorithm such as countingSort, radixSort, and, especially, bucketSort.
+As a result, the main idea of the flashSort algorithm is to classify elements into smaller buckets or classes. 
+Then flashSort in-place permutes elements into their appropriate buckets, which helps flashSort outweigh its counterparts. 
+After the permutation, the original array becomes a nearly sorted one.
+Intentionally, this distribution of elements is insertionSort's best case, which is an order of O(n).
 //-----------------------
-Overall, The flashSort consists of three logical blocks: classification, permutation, and straight insertion.
-    Classification determines the size of each class of elements. 
-    Permutation does long-range(the whole array) reordering to collect elements of each class together. 
-    Straight insertion does the final short-range(each small buckets) ordering.
+Overall, the flashSort consists of three logical blocks: classification, permutation, and straight insertion.
+    Classification determines the size of each class of elements. 
+    Permutation does long-range (the whole array) reordering to collect elements of each class together. 
+    Straight insertion does the final short-range (each small bucket) ordering.
 //=======================
 2.Step-by-step description
 //-----------------------
 a.Classification
-In this pharse, the algorithm is finding the amount of buckets-stored by m- and 
-their size-stored by an array l[] with the size of m elements.
-    m will be the floor of multiplication of a constant(0.45) and the number of elements(n).
+In this pharse, the algorithm finds the number of buckets (stored by m) and their size (stored by an array-l[]) with the size of m elements.
+    m will be the floor of multiplication of a constant (0.45) and the number of elements (n).
 
-Assume that the values in bucket[0] <= bucket[1] <= ...<=bucket[k] ...<= bucket[m-1].
+Assume that the values in bucket[0] <= bucket[1] <= ... <=bucket[k] ... <= bucket[m-1].
                           
-To find where arr[i] belongs to
-    We, first, find the max and min values by scanning through the arr[].
-    Let arr[i] is an element in the given array
-    Let k be the class of arr[i], that 
-        (1) k(arr[i]) = [(m - 1) / (max - min)] * (arr[i] - min) 
-        (*) In the source code, i'm using variable c1 = [(m - 1) / (max - min)]
-        (2) Now k(arr[i]) = c1 * (arr[i] - min)
-            The result k will be a value from 0 to m-1.
-            This function would help find the bucket arr[i] should be placed.
-            Note:   min--------arr[i]---------------------------------------max
-                    |(arr[i] - min)|
-                    |-----------------(max - min)-----------------------------|
-                    |k = 0||k = 1| ...................................|k = m-1|
-                Divide (m-1) into the distance between max and min equal fields.
-                Each field's size is about c1 = (m-1)/(max-min)
-                So that the field of arr[i]: k = round of [c1 * (distance between arr[i] and min)]
-                                                       or [c1 * (arr[i]-min)]   
+To find where arr[i] belongs,
+    Firstly, find the max and min values by scanning through the arr[].
+    Let arr [i] represent one of the elements in the given array.
+    Let k be the class of arr[i], that 
+        (1) k(arr[i]) = [(m - 1) / (max - min)] * (arr[i] - min) 
+        (*) In the source code, i'm using variable c1 = [(m - 1) / (max - min)]
+        (2) k (arr [i]) = c1 * (arr [i]-min).
+            The result, k, will be a value from 0 to m-1.
+            This function would help find the bucket where arr [i] should be placed.
+            Note:   min--------arr[i]---------------------------------------max
+                    |(arr[i] - min)|
+                    |-----------------(max - min)-----------------------------|
+                    |k = 0||k = 1| ...................................|k = m-1|
+                    
+                Divide (m-1) into the distance between the maximum and minimum equal fields.
+                The size of each field is approximately c1 = (m-1)/(max-min).
+                As a result, the field of arr [i] is as follows: k = round of [c1* (distance between arr [i] and min)]
+                Alternatively, k = [c1 * (arr [i]-min)] 
 
+            Note: Since using (1) to calculate k, the calculation will ask for additional memories,
+            which causes the previous version using the first (1) method to crash when the input size is over 100'000. 
+            Thus, (2) will help enormously improve the performance more than (1) does.
 
-            Note: Since, using (1) to calculate k, the calculation will ask for additional memories,
-            which cause the previous version using the first(1) method to crash when the input size is over 100'000. 
-            Thus, (2) will help enormously improve the performances than (1) does.
-
-As the main part of this pharse, The second for-loop will scan through all elements, get their k(arr[i]) and sum up the approriate l[k] by one.
-Then it accumulates sum of l[k]. As the result, we have a prefix sum array which help determine where a bucket end.
+As the main part of this pharse, the second for-loop will scan through all elements, get their k(arr [i]), and sum up the appropriate l[k].
+Then it accumulates the sum of l[k]. As a result, we have a prefix sum array that helps determine where a bucket ends.
 **in more detail, the last position of a bucket will be l[k]-1.
 
 b.Permutation
-Here, flashSort assigns elements into the approriate class.
-Clearly, before moving one element-flash = arr[j]- to new location-t = (l[k]-1), we have to move that old one-arr[t]-away. 
-Lets use a variable -hold- to store the value of the removed item.
-We may then calculate its new location -l[k(new-flash)]- and go until nothing is moveable j = l[k].
-Then, if move-variable is still less than n-1 or we can say that every elements are not moved, 
-we will find a value j that arr[j] is not placed at its correct class and continue the above process.
+Here, flashSort assigns elements to the appropriate class.
+Clearly, before moving one element—flash = arr[j]—to a new location—t = (l[k]-1), we have to move that old one—arr[t]—away. 
+Let's use a variable -hold-to store the value of the removed item.
+We may then calculate its new location -l[k(new_flash)]- and go until nothing is moveable j = l[k].
+Then, if move-variable is still less than n-1, we can say that every element is not moved,
+we will find a value j that arr[j] is not placed in its correct class and continue the above process.
 
 c.Straight insertion
 Finally, we have a mostly sorted array to deal with after the permutation phase has shifted everything into nearly the correct position.
