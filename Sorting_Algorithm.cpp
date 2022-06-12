@@ -41,7 +41,7 @@ string Input_Order(string input_order)
 }
 
 // Algorithm mode ------------------------------------------
-void Output_Option(string out_parameter, const clock_t timer, long long comparison)
+void Output_Option(string out_parameter, const clock_t timer, unsigned long long comparison)
 {
     switch (output[out_parameter])
     {
@@ -66,7 +66,7 @@ void Output_Option(string out_parameter, const clock_t timer, long long comparis
         break;
     }
 }
-void OutputComparision(clock_t time1, clock_t time2, long long comparsion1, long long comparsion2)
+void OutputComparision(clock_t time1, clock_t time2, unsigned long long comparsion1, unsigned long long comparsion2)
 {
     cout << "Running time: " << time1 << "|" << time2 << endl;
     cout << "Comparision:  " << comparsion1 << "|" << comparsion2 << endl;
