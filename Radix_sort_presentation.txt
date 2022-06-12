@@ -1,0 +1,21 @@
+1.Idea
+//-----------------------
+RadixSort is a distribution-sorting algorithm. Thus, it does not compare the items of an array.
+The objective is to create groupings of data elements and then combine them to sort a collection of data.
+//-----------------------
+RadixSort reorders components in what way? 
+    Iteration 1: Creating groupings based on the right-most digit, which is the least significant. 
+                 Bringing these groups together. 
+    Iteration 2: Creating groupings based on the next-to-last digits 
+                 Bringing these groups together. 
+    So on....
+    
+    *For items with more than one significant digit,
+this bucketing procedure is repeated for each digit, 
+while maintaining the previous step's ordering, 
+until all digits have been processed.
+
+2.Step-by-step description
+
+
+3.Complexity evaluations

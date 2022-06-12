@@ -28,3 +28,34 @@ void shakerSort(int a[], int n, unsigned long long &comparison) {
 		first = k;
 	}
 }
+
+void shakerSort(int a[], int n) {
+	int first = 0; //First element in the array
+	int last = n - 1; //Last element in the array
+	int k = 0;
+
+	while (first < last)
+	{
+        //Bring the largest value to the rightside of the array
+		for (int i = first; i < last; i++)
+		{
+			if (a[i] > a[i + 1])
+			{
+				swap(a[i], a[i + 1]);
+				k = i;
+			}
+		}
+		last = k;
+
+        //Bring the smallest value to the leftside of the array
+		for (int i = last; i > first; i--)
+		{
+			if (a[i] < a[i - 1])
+			{
+				swap(a[i], a[i - 1]);
+				k = i;
+			}
+		}
+		first = k;
+	}
+}

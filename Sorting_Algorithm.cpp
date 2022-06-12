@@ -5,227 +5,11 @@
 #include <fstream>
 #include <cstring>
 
-#include "Counting_Sort.h"
-#include "DataGenerator.h"
-#include "Quick_Sort.h"
-#include "Radix_Sort.h"
-#include "Shaker_Sort.h"
-#include "Shell_Sort.h"
-#include "Flash_Sort.h"
-#include "Selection_Sort.h"
-#include "Insertion_Sort.h"
-#include "Bubble_Sort.h"
-#include "heap_sort.h"
-#include "Merge_Sort.h"
+#include "dataType.h"
+#include "Algo_Option.h"
+
 using namespace std;
 
-enum Mode
-{
-    a,
-    c,
-    e
-};
-enum Algorithm
-{
-    Selection,
-    Insertion,
-    Bubble,
-    Shaker,
-    Shell,
-    Heap,
-    Merge,
-    Quick,
-    Counting,
-    Radix,
-    Flash
-};
-enum Order
-{
-    _rand,
-    _nsorted,
-    _sorted,
-    _rev,
-    _all
-};
-enum Output
-{
-    _time,
-    _comp,
-    _both
-};
-
-static map<string, Mode> mode;
-static map<string, Algorithm> algorithm;
-static map<string, Order> order;
-static map<string, Output> output;
-
-void Init_Mode()
-{
-    mode["-a"] = a;
-    mode["-c"] = c;
-    mode["-e"] = e;
-}
-
-void Init_Algorithm()
-{
-    // O(N^2)
-    algorithm["selection-sort"] = Selection; algorithm["0"] = Selection;
-    algorithm["insertion-sort"] = Insertion; algorithm["1"] = Insertion;
-    algorithm["bubble-sort"] = Bubble; algorithm["2"] = Bubble;
-    algorithm["shaker-sort"] = Shaker; algorithm["3"] = Shaker;
-    algorithm["shell-sort"] = Shell; algorithm["4"] = Shell;
-    // O(Nlogn)
-    algorithm["heap-sort"] = Heap; algorithm["5"] = Heap;
-    algorithm["merge-sort"] = Merge; algorithm["6"] = Merge;
-    algorithm["quick-sort"] = Quick; algorithm["7"] = Quick;
-    // O(N)
-    algorithm["counting-sort"] = Counting; algorithm["8"] = Counting;
-    algorithm["radix-sort"] = Radix; algorithm["9"] = Radix;
-    algorithm["flash-sort"] = Flash; algorithm["10"] = Flash;
-}
-
-void Init_Order()
-{
-    order["-rand"] = _rand; order["0"] = _rand;
-    order["-nsorted"] = _nsorted; order["1"] = _nsorted;
-    order["-sorted"] = _sorted; order["2"] = _sorted;
-    order["-rev"] = _rev; order["3"] = _rev;
-}
-
-void Init_Output()
-{
-    output["-time"] = _time;
-    output["-comp"] = _comp;
-    output["-both"] = _both;
-}
-
-string Algorithm_Option(string key, bool just_name, clock_t &timer, unsigned long long &comparison, int a[] = nullptr, int n = 0)
-{
-    string al_name;
-    clock_t start, end;
-    comparison = 0;
-    switch (algorithm[key])
-    {
-    // Selection, Insertion, Bubble, Shaker, Shell,
-    case Selection:
-    {
-        al_name = "Selection sort";
-        if (just_name)
-            return al_name;
-        start = clock();
-        selectionSort(a,n,comparison);
-        end = clock();
-    }
-    break;
-    case Insertion:
-    {
-        al_name = "Insertion sort";
-        if (just_name)
-            return al_name;
-        start = clock();
-        insertionSort(a,n,comparison);
-        end = clock();
-    }
-    break;
-    case Bubble:
-    {
-        al_name = "Bubble sort";
-        if (just_name)
-            return al_name;
-        start = clock();
-        bubbleSort(a,n,comparison);
-        end = clock();
-    }
-    break;
-    case Shaker:
-    {
-        al_name = "Shaker sort";
-        if (just_name)
-            return al_name;
-        start = clock();
-        shakerSort(a, n, comparison);
-        end = clock();
-    }
-    break;
-    case Shell:
-    {
-        al_name = "Shell sort";
-        if (just_name)
-            return al_name;
-        start = clock();
-        shellSort(a, n, comparison);
-        end = clock();
-    }
-    break;
-        // Heap, Merge, Quick,
-    case Heap:
-    {
-        al_name = "Heap sort";
-        if (just_name)
-            return al_name;
-        start = clock();
-        heapSort(a,n,comparison);
-        end = clock();
-    }
-    break;
-    case Merge:
-    {
-        al_name = "Merge sort";
-        if (just_name)
-            return al_name;
-        start = clock();
-        mergeSort(a,0,n-1,comparison);
-        end = clock();
-    }
-    break;
-    case Quick:
-    {
-        al_name = "Quick sort";
-        if (just_name)
-            return al_name;
-        start = clock();
-        comparison = 0; //Because quickSort is a recursive function so assign value 0 to the variable comparison here for safety.
-        quickSort(a, 0, n - 1, comparison); // 0: first element in the array, n-1: last element in the array
-        end = clock();
-    }
-    break;
-        // Counting, Radix, Flash
-    case Counting:
-    {
-        al_name = "Counting sort";
-        if (just_name)
-            return al_name;
-        start = clock();
-        countingSort(a, n, comparison);
-        end = clock();
-    }
-    break;
-    case Radix:
-    {
-        al_name = "Radix sort";
-        if (just_name)
-            return al_name;
-        start = clock();
-        radixSort(a, n, comparison);
-        end = clock();
-    }
-    break;
-    case Flash:
-    {
-        al_name = "Flash sort";
-        if (just_name)
-            return al_name;
-        start = clock();
-        flashSort(a, n, comparison);
-        end = clock();
-    }
-    break;
-    default:
-        break;
-    }
-    timer = (end - start);
-    return al_name;
-}
 
 string Input_Order(string input_order)
 {
@@ -291,28 +75,32 @@ void OutputComparision(clock_t time1, clock_t time2, long long comparsion1, long
 }
 void Algorithm_Mode(string al, string input_file, int input_size, string input_order, string out_parameter, bool exist)
 {
-    int *a;
+    int *a, *b;
     // Command 1
     if (exist)
     {
         fstream inp(input_file, ios::in);
         inp >> input_size;
         a = new int[input_size];
+        b = new int[input_size];
         for (int i = 0; i < input_size; i++)
         {
             inp >> a[i];
+            b[i] = a[i];
         }
         inp.close();
     }
     else
     {
         a = new int[input_size];
+        b = new int[input_size];
         GenerateData(a, input_size, order[input_order]);
         fstream inp(input_file, ios::out);
         inp << input_size << endl;
         for (int i = 0; i < input_size; i++)
         {
             inp << a[i] << " ";
+            b[i] = a[i];
         }
         inp.close();
     }
@@ -320,7 +108,8 @@ void Algorithm_Mode(string al, string input_file, int input_size, string input_o
     clock_t timer;
     unsigned long long comparison;
 
-    string temp = Algorithm_Option(al, false, timer, comparison, a, input_size);
+    string temp = Algorithm_Option(al, false, timer, a, input_size);
+           temp = Algorithm_Option(al, false, comparison, b, input_size);
     if (!exist)
         cout << "Input order: " << Input_Order(input_order) << endl;
     cout << "---------------------------" << endl;
@@ -338,49 +127,65 @@ void Algorithm_Mode(string al, string input_file, int input_size, string input_o
         inp.close();
     }
     delete[] a;
+    delete[] b;
 }
 // Comparison mode ------------------------------------------
 void Comparsion_mode(string algo1, string algo2, string inputFile, int inSize, string inOrder, bool exist)
 {
-    int *a1;
-    int *a2;
+    int *a;
+    int *b;
     if (exist)
     {
         fstream fin;
         fin.open(inputFile, ios::in);
         {
             fin >> inSize;
-            a1 = new int[inSize];
-            a2 = new int[inSize];
+            a = new int[inSize];
+            b = new int[inSize];
             for (int i = 0; i < inSize; i++)
             {
-                fin >> a1[i];
-                a2[i] = a1[i];
+                fin >> a[i];
+                b[i] = a[i];
             }
         }
         fin.close();
     }
     else
     {
-        a1 = new int[inSize];
-        a2 = new int[inSize];
-        GenerateData(a1, inSize, order[inOrder]);
+        a = new int[inSize];
+        b = new int[inSize];
+        GenerateData(a, inSize, order[inOrder]);
         fstream fout;
         fout.open(inputFile, ios::out);
         {
             fout << inSize << endl;
             for (int i = 0; i < inSize; i++)
             {
-                fout << a1[i] << " ";
-                a2[i] = a1[i];
+                fout << a[i] << " ";
+                b[i] = a[i];
             }
         }
         fout.close();
     }
     clock_t time1, time2;
     unsigned long long comparision1, comparision2;
-    Algorithm_Option(algo1, false, time1, comparision1, a1, inSize);
-    Algorithm_Option(algo2, false, time2, comparision2, a2, inSize);
+    Algorithm_Option(algo1, false, time1, a, inSize);
+    Algorithm_Option(algo2, false, time2, b, inSize);
+    //Refresh arrays
+    fstream fin;
+    fin.open(inputFile, ios::in);
+    {
+        fin >> inSize;
+        for (int i = 0; i < inSize; i++)
+        {
+            fin >> a[i];
+            b[i] = a[i];
+        }
+    }
+    fin.close();
+    //end 
+    Algorithm_Option(algo1, false, comparision1, a, inSize);
+    Algorithm_Option(algo2, false, comparision2, b, inSize);
     if (exist == false)
     {
         cout << "Input order: " << Input_Order(inOrder) << endl;
@@ -393,18 +198,18 @@ void Comparsion_mode(string algo1, string algo2, string inputFile, int inSize, s
         fout.open("output.txt",ios::out);
         fout<<inSize<<endl;
         for(int i=0;i<inSize;i++){
-            fout<<a1[i]<<" ";
+            fout<<a[i]<<" ";
         }
         fout.close();
     }
-    delete[] a1;
-    delete[] a2;
+    delete[] a;
+    delete[] b;
 }
 
 // Experiment mode ------------------------------------------
 void Experiment_mode(){
-    int dataSize[]{30'000, 50'000, 100'000, 300'000, 500'000};
-    int *a;
+    int dataSize[]{10'000, 30'000, 50'000, 100'000, 300'000, 500'000};
+    int *a,*b,*store;
     
     string index = "0";
     string s_index = "0";
@@ -415,22 +220,30 @@ void Experiment_mode(){
         outputfile.insert(7,index); 
         fs.open(outputfile, ios::out);
         fs << Input_Order(index) << endl;                 
-        for(int j = 0; j < 5; j++){
+        for(int j = 0; j < 6; j++){
             int n = dataSize[j];
             fs << "\t" << n << endl;
+            a = new int[n];
+            b = new int[n];
+            store = new int[n];
+            GenerateData(store, n, i);
             for(int sort = 0; sort < 11; sort++){
-                a = new int[n];
-                GenerateData(a, n, i);
+                for(int i = 0; i < n; i++){
+                    b[i] = a[i] = store[i];
+                }
                 clock_t timer;
                 unsigned long long comparison;
                 s_index = to_string(sort);
-                string temp = Algorithm_Option(s_index, false, timer, comparison, a, n);
+                string temp = Algorithm_Option(s_index, false, timer, a, n);
+                       temp = Algorithm_Option(s_index, false, comparison, b, n);
                 delete[] a;
+                delete[] b;
                 //Write data
                 fs << "\t\tAlgorithm: " << temp << endl
                     << "\t\t\t" << "Comparisons: " << comparison << endl
                     << "\t\t\t" << "Running time: " << timer << endl;
             }
+            delete[] store;
             fs << endl;
         }
         fs.close();
@@ -451,7 +264,7 @@ int main(int argc, char *argv[])
         cout << "ALGORITHM MODE" << endl;
         unsigned long long dummy;
         clock_t dummy_t;
-        cout << Algorithm_Option(argv[2], true, dummy_t, dummy) << endl;
+        cout << Algorithm_Option(argv[2], true, dummy_t) << endl;
         string temp = argv[3];
         // Command 1
         if (temp.find(".txt") != temp.npos)
@@ -486,8 +299,8 @@ int main(int argc, char *argv[])
         cout << "COMPARISON MODE" << endl;
         unsigned long long dummy1, dummy2;
         clock_t dummy_t1, dummy_t2;
-        cout << "Algorithm: " << Algorithm_Option(argv[2], true, dummy_t1, dummy1) << "|"
-             << Algorithm_Option(argv[3], true, dummy_t2, dummy2) << endl;
+        cout << "Algorithm: " << Algorithm_Option(argv[2], true, dummy_t1) << "|"
+             << Algorithm_Option(argv[3], true, dummy_t2) << endl;
         if (argc == 5)
         {
             fstream fin;

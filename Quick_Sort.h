@@ -16,3 +16,22 @@ void quickSort(int arr[], int first, int last, unsigned long long &comparison) {
     if (++comparison && first < j) quickSort(arr, first, j, comparison);
     if (++comparison && i < last) quickSort(arr, i, last, comparison);
 }
+
+// No count
+void quickSort(int arr[], int first, int last) {
+    int pivot = arr[(first + last) / 2];
+    int i = first, j = last;
+
+    do {
+        while (arr[i] < pivot) i++;
+        while (arr[j] > pivot) j--;
+
+        if (i <= j) {
+            swap(arr[i], arr[j]);
+            i++; j--;
+        }
+    } while (i < j);
+
+    if (first < j) quickSort(arr, first, j);
+    if (i < last) quickSort(arr, i, last);
+}
