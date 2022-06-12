@@ -17,11 +17,12 @@ void merge(int arr[], int l, int m, int r, unsigned long long &comparision) {
     j = 0;
     k = l;
     while ((++comparision)&&(i < n1)&&(++comparision)&&( j < n2)) {
-        if (L[i] <= R[j]) {
+        if (++comparison && L[i] <= R[j]) {
             arr[k] = L[i];
             i++;
         }
         else {
+            ++comparison;
             arr[k] = R[j];
             j++;
         }
@@ -39,7 +40,7 @@ void merge(int arr[], int l, int m, int r, unsigned long long &comparision) {
     }
 }
 void mergeSort(int a[], int l, int r, unsigned long long &comparision) {
-    if (l < r) {
+    if (++comparison && l < r) {
         int m = l + (r - l) / 2;
         mergeSort(a, l, m,comparision);
         mergeSort(a, m + 1, r,comparision);
