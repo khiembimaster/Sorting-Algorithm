@@ -1,31 +1,31 @@
-void heapRebuild(int start, int arr[], int n, unsigned long long &comparision)
+void heapRebuild(int start, int arr[], int n, unsigned long long &comparison)
 {
     int leftChild = 2 * start + 1;
-    if ((++comparision)&&(leftChild >= n))
+    if ((++comparison)&&(leftChild >= n))
         return;
     int largerChild = leftChild;
     int rightChild = 2 * start + 2;
-    if ((++comparision)&&(rightChild < n))
+    if ((++comparison)&&(rightChild < n))
     {
-        if ((++comparision)&&(arr[rightChild] > arr[largerChild]))
+        if ((++comparison)&&(arr[rightChild] > arr[largerChild]))
             largerChild = rightChild;
     }
-    if ((++comparision)&&(arr[start] < arr[largerChild]))
+    if ((++comparison)&&(arr[start] < arr[largerChild]))
     {
         swap(arr[largerChild], arr[start]);
-        heapRebuild(largerChild, arr, n,comparision);
+        heapRebuild(largerChild, arr, n,comparison);
     }
 }
-void heapSort(int arr[], int n, unsigned long long &comparision)
+void heapSort(int arr[], int n, unsigned long long &comparison)
 {
-    comparision=0;
-    for (int index = (n - 1) / 2;(++comparision)&& (index >= 0); index--)
-        heapRebuild(index, arr, n,comparision);
+    comparison=0;
+    for (int index = (n - 1) / 2;(++comparison)&& (index >= 0); index--)
+        heapRebuild(index, arr, n,comparison);
     swap(arr[0], arr[n - 1]);
     int heapSize = n - 1; 
-    while ((++comparision)&&(heapSize > 1))
+    while ((++comparison)&&(heapSize > 1))
     {
-        heapRebuild(0, arr, heapSize,comparision);
+        heapRebuild(0, arr, heapSize,comparison);
         heapSize--;
         swap(arr[0], arr[heapSize]);
     }
