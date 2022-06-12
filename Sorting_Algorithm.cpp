@@ -219,7 +219,8 @@ void Experiment_mode(){
         index = to_string(i);
         outputfile.insert(7,index); 
         fs.open(outputfile, ios::out);
-        fs << Input_Order(index) << endl;                 
+        fs << Input_Order(index) << endl; 
+        cout << Input_Order(index) << endl;                
         for(int j = 0; j < 6; j++){
             int n = dataSize[j];
             fs << "\t" << n << endl;
@@ -227,6 +228,7 @@ void Experiment_mode(){
             b = new int[n];
             store = new int[n];
             GenerateData(store, n, i);
+            cout << "\t" << dataSize[j] << endl;
             for(int sort = 0; sort < 11; sort++){
                 for(int cur = 0; cur < n; cur++){
                     b[cur] = a[cur] = store[cur];
@@ -240,6 +242,8 @@ void Experiment_mode(){
                 fs << "\t\tAlgorithm: " << temp << endl
                     << "\t\t\t" << "Comparisons: " << comparison << endl
                     << "\t\t\t" << "Running time: " << timer << endl;
+
+                cout << "\t\t" << temp << endl;
             }
             delete[] a;
             delete[] b;
