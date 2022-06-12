@@ -4,7 +4,7 @@ void shellSort(int arr[], int size, unsigned long long &comparison)
     // Start with a big gap, then reduce the gap
     for (int gap = size/2; ++comparison && gap > 0; gap /= 2)
     {
-        comparison++;
+        
         for (int i = gap; ++comparison && i < size; i += 1)
         {
             int temp = arr[i];
