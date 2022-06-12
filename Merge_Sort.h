@@ -22,7 +22,7 @@ void merge(int arr[], int l, int m, int r, unsigned long long &comparison) {
             i++;
         }
         else {
-            ++comparison;
+           
             arr[k] = R[j];
             j++;
         }
