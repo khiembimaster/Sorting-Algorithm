@@ -228,21 +228,21 @@ void Experiment_mode(){
             store = new int[n];
             GenerateData(store, n, i);
             for(int sort = 0; sort < 11; sort++){
-                for(int i = 0; i < n; i++){
-                    b[i] = a[i] = store[i];
+                for(int cur = 0; cur < n; cur++){
+                    b[cur] = a[cur] = store[cur];
                 }
                 clock_t timer;
                 unsigned long long comparison;
                 s_index = to_string(sort);
                 string temp = Algorithm_Option(s_index, false, timer, a, n);
                        temp = Algorithm_Option(s_index, false, comparison, b, n);
-                delete[] a;
-                delete[] b;
                 //Write data
                 fs << "\t\tAlgorithm: " << temp << endl
                     << "\t\t\t" << "Comparisons: " << comparison << endl
                     << "\t\t\t" << "Running time: " << timer << endl;
             }
+            delete[] a;
+            delete[] b;
             delete[] store;
             fs << endl;
         }
