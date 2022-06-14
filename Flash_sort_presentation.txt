@@ -69,4 +69,4 @@ a.Time Complexity
     (2)Permutation(n) = O(n). since Each item is moved once, and j scans through the entire array at most once. 
     
     Assuming the classes are about the same size, this requires O((n/m)2) = O(1) time for each class, so that
-    (3)Straight_insertion(n) = O(n)*O(1) = O(n). 
+    (3)Straight_insertion(n) = O(n)*O(1) = O(n).  
