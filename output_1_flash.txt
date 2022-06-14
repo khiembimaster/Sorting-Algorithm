@@ -1,0 +1,31 @@
+Nearly Sorted
+	10000
+		Algorithm: Flash sort
+			Comparisons: 118966
+			Running time: 0
+
+	30000
+		Algorithm: Flash sort
+			Comparisons: 356965
+			Running time: 0
+
+	50000
+		Algorithm: Flash sort
+			Comparisons: 594963
+			Running time: 2
+
+	100000
+		Algorithm: Flash sort
+			Comparisons: 1189963
+			Running time: 3
+
+	300000
+		Algorithm: Flash sort
+			Comparisons: 3569964
+			Running time: 11
+
+	500000
+		Algorithm: Flash sort
+			Comparisons: 5949964
+			Running time: 17
+

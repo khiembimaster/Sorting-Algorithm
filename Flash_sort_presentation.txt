@@ -60,7 +60,7 @@ Thus, it's time to use a simple-comparison-sort algorithm, insertionSort, to arr
 
 3.Complexity evaluations
 a.Time Complexity
-    T(n) = O(n) = Classification(n)(1) + Permutation(n)(2) + Straight_insertion(n)(3).
+    In all cases, T(n) = O(n) = Classification(n)(1) + Permutation(n)(2) + Straight_insertion(n)(3).
     
     (1)Classification(n) = O(n) =
                             scanning the input to find the size of each class = O(n)
@@ -68,5 +68,5 @@ a.Time Complexity
                         +   find max and min = O(n) 
     (2)Permutation(n) = O(n). since Each item is moved once, and j scans through the entire array at most once. 
     
-    Assuming the classes are about the same size, this requires O((n/m)2) = O(1) time for each class, so that
+    Assuming the classes are about the same size, this requires O((n/m)^2) = O(1) time for each class, so that
     (3)Straight_insertion(n) = O(n)*O(1) = O(n).  

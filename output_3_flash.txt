@@ -1,0 +1,31 @@
+Reversed
+	10000
+		Algorithm: Flash sort
+			Comparisons: 103749
+			Running time: 0
+
+	30000
+		Algorithm: Flash sort
+			Comparisons: 311249
+			Running time: 1
+
+	50000
+		Algorithm: Flash sort
+			Comparisons: 518749
+			Running time: 3
+
+	100000
+		Algorithm: Flash sort
+			Comparisons: 1037499
+			Running time: 3
+
+	300000
+		Algorithm: Flash sort
+			Comparisons: 3112499
+			Running time: 9
+
+	500000
+		Algorithm: Flash sort
+			Comparisons: 5187499
+			Running time: 16
+

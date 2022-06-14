@@ -215,7 +215,7 @@ void Experiment_mode(){
     string s_index = "0";
     fstream fs;
     for(int i = 0; i < 4; i++){
-        string outputfile = "output_.txt";
+        string outputfile = "output__flash.txt";
         index = to_string(i);
         outputfile.insert(7,index); 
         fs.open(outputfile, ios::out);
@@ -229,7 +229,7 @@ void Experiment_mode(){
             store = new int[n];
             GenerateData(store, n, i);
             cout << "\t" << dataSize[j] << endl;
-            for(int sort = 0; sort < 11; sort++){
+            for(int sort = 10; sort < 11; sort++){
                 for(int cur = 0; cur < n; cur++){
                     b[cur] = a[cur] = store[cur];
                 }

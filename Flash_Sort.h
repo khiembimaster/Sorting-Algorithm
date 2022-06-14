@@ -10,10 +10,10 @@ void flashSort(int arr[], int n, unsigned long long &count_comp){
         if((++count_comp) && (arr[i] < min)) min = arr[i];
         if((++count_comp) && (arr[i] > max)) max = arr[i];
     }
-    float c1 = (m-1)/(max-min);
+    double c1 = (double)(m-1)/(max-min);
     //Store numbers of elements in each class l[k]
     for(int i = 0;(++count_comp) && (i < n); i++){
-        int k = c1*(arr[i]-min);
+        int k = int(c1*(arr[i]-min));
         l[k]++;
     }
     //// accumulate sum of l[k]
@@ -68,10 +68,10 @@ void flashSort(int arr[], int n){
         if(arr[i] < min) min = arr[i];
         if(arr[i] > max) max = arr[i];
     }
-    float c1 = (m-1)/(max-min);
+    double c1 = (double)(m-1)/(max-min);
     //Store numbers of elements in each class l[k]
     for(int i = 0; i < n; i++){
-        int k = c1*(arr[i]-min);
+        int k = int(c1*(arr[i]-min));
         l[k]++;
     }
     //// accumulate sum of l[k]

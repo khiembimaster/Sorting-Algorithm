@@ -1,0 +1,31 @@
+Randomize
+	10000
+		Algorithm: Flash sort
+			Comparisons: 95009
+			Running time: 1
+
+	30000
+		Algorithm: Flash sort
+			Comparisons: 284134
+			Running time: 2
+
+	50000
+		Algorithm: Flash sort
+			Comparisons: 450661
+			Running time: 2
+
+	100000
+		Algorithm: Flash sort
+			Comparisons: 886454
+			Running time: 4
+
+	300000
+		Algorithm: Flash sort
+			Comparisons: 2613064
+			Running time: 50
+
+	500000
+		Algorithm: Flash sort
+			Comparisons: 4363821
+			Running time: 91
+
