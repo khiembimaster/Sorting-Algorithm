@@ -75,3 +75,4 @@ a.Time Complexity
 b.Space Complexity
     To hold the number of items in each class, we'll need an array *l of size m. 
     However, as m = 0.45*n, it appears to be significantly smaller than the amount of additional memory required by countingSort and radixSort to achieve a runtime complexity of O(n).
+    ==> S(n) = m << n.

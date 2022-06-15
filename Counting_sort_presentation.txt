@@ -1,0 +1,35 @@
+1.Idea
+The concept of Counting sort is straightforward. 
+The total number of smaller items indicates each element's final position in the sorted array.
+The implementation of counting sort here will only work with natural numbers.
+However, I will discuss the improvement later.
+
+2.Step-by-step description
+    Compute the frequency of each of those values and store them in array
+        To do this, we need an array called "f" which stores the frequencies of elements. 
+        The array's size should cover all possible elements in the range [0, u], where u is the maximum number.
+        f[i] will return the frequency of key i, which is an element in the array.
+    Distribution counting: add up sums of frequencies
+        As mentioned before, the total number of smaller items indicates each element's final position in the sorted array.
+        Thus, f[i] = f[i] + f[i-1], where f[i-1] is the last position of (i-1) if it exists.
+        If (i-1) does not exist, the position of the smaller existing item will be maintained.
+    Distribute values to their final positions
+        The distribution values decide the proper positions for the last occurrences of their elements in the sorted array.
+            let b be an array of size n
+            f[arr[i]]-1 is a hash function which maps arr[i] to its final index.
+            Thus, b[f[arr[i]]-1] = arr[i] copies the value of element I to a new location in array b.
+        Note: The array should be visited from right to left.
+    Copy array b[] back to array arr[]
+        arr[1..n] = b[1..n]
+        Now, arr[] is sorted.
+3.Complexity evaluations
+a.Time Complexity
+    T(n) = find maximum value(u) --> O(n) 
+        +  perform distribution counting --> O(n) 
+        +  accumulate sum of frequencies --> O(u) (u <= n)
+        +  distribute values to their final positions --> O(n)
+        +  copy array b[] back to array arr[] --> O(n)
+==> T(n) = O(n)
+b.Space Complexity  
+    S(n) = array of frequency(f[]) + temporary arr (b[])
+         =          u + n (memories)

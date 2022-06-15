@@ -45,6 +45,6 @@ a.Time Complexity
 ==> Hence, T(n) = O(n) + O(log base 10 of n) + O(1) + (*) = O(n)
 
 b.Space Complexity
-    size of "tempArr" = 10*n (int).
-    size of "tempCount" = 10 (int).
-    ==>The amount of extra space required has an upper bound of n.
+    S(n) = size of "tempArr" --> 10*n (int).
+         + size of "tempCount" --> 10 (int).
+    ==>The amount of extra space required has an upper bound of n, S(n) = 10 * (n + 1).
