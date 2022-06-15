@@ -1,6 +1,6 @@
 1.Idea
 //-----------------------
-Radix Sort is a distribution-sorting algorithm. Thus, it does not compare the items of an array.
+Radix Sort is a distribution-sorting algorithm. As a result, it does not compare array elements.
 The objective is to create groupings of data elements and then combine them to sort a collection of data.
 //-----------------------
 Radix Sort reorders components in what way? 
@@ -10,28 +10,20 @@ Radix Sort reorders components in what way?
                  Bringing these groups together. 
     So on....
     
-    *For items with more than one significant digit,
-this bucketing procedure is repeated for each digit, 
-while maintaining the previous step's ordering, 
-until all digits have been processed.
+    *For items with more than one significant digit, this bucketing procedure is repeated for each digit, while maintaining the previous step's ordering, until all digits have been processed.
 
 2.Step-by-step description
 #Preparation:
-Firstly, Radix Sort finds the number of digits of the maximum number. 
-This value is stored in the variable "digits", which will, then be used as a stop condition.
-Next, let's create a two-dimension array "tempArr" of the size 10 by "n". 
-Each "temp[i]" is a queue (first-in-first-out), which is used to distribute elements by digit (0–9).
+Firstly, Radix Sort finds the number of digits of the maximum number. This value is stored in the variable "digits", which will, then be used as a stop condition.
+Next, let's create a two-dimension array "tempArr" of the size 10 by "n". Each "temp[i]" is a queue (first-in-first-out), which is used to distribute elements by digit (0–9).
 #Sorting
 This process will repeat for "digits" of time:
-    Set the temporary array to its default value (a[i][j] == 0)
+    Set the temporary array to its default value (a[i][j] == 0).
     Enque all elements into their correct groups (0-9).
     Sequentially combine ten groups from left to right (i = 0 to i = 9). 
-    Since the process started from the least significant radix, 
-    The result array of the combination is an array 
-    whose elements have the same number of digits as that iteration are sorted,
-    while those smaller ones won't be changed.
+    Since the process started from the least significant radix, the result array of the combination is an array whose elements have the same number of digits as that iteration are sorted, while those smaller ones won't be changed.
 
-#After this process, we will have an sorted array.  
+#After this process, we will have a sorted array.  
 
 3.Complexity evaluations
 a.Time Complexity
@@ -40,19 +32,19 @@ a.Time Complexity
         +  create tempArr --> 10 groups ==> O(10) = O(1) = constant
         +  form groups of numbers and combine groups (*)
     (*) = digits * (reset tempCount + form groups + combine groups)
-        *reset tempCount = 10 times.
-        *form groups = n.
-        *combine groups = 10 * number of elements in that class = n.  
+                    --> reset tempCount = 10 loops.
+                    --> form groups = n loops.
+                    --> combine groups = n loops.  
 ==> (*) = O(digits * (2n + 10)) = O(digits * n)
     digits = log base 10 of max_val.
     let max_val <= n^constant.
-    then digits <= constant * (log base 10 of n).
-    (*) = O((log base 10 of n) * n).
-    As log base 10 of a number is close to a constant --> (*) = O(n).
+    then digits <= constant * (log base 10 of n) --> digits = O(log base 10 of n)
+    Thus, (*) = O((log base 10 of n) * n).
+    Because a number's log base 10 is far lower than the number itself, (*) = O(n).
 
-==> Thus, T(n) = O(n) + O(d) + O(1) + (*) = O(n)
+==> Hence, T(n) = O(n) + O(log base 10 of n) + O(1) + (*) = O(n)
 
 b.Space Complexity
     size of "tempArr" = 10*n (int).
     size of "tempCount" = 10 (int).
-    ==> Extra Space needed is an upper bound of n.
+    ==>The amount of extra space required has an upper bound of n.
