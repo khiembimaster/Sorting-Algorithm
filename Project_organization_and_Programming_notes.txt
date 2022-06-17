@@ -1,0 +1,151 @@
+Requirements and Solution
+    A.Input arguments:
+        The program must accept and handle at least six input arguments, each of which corresponds to a separate set of choices and methods.
+        As a result, using an if-else statement may be inappropriate.
+    
+        In order to get clean code, I utilize a data type offered by C++ called "Enum."
+        Enumerated type (enumeration) is a data type that may be allocated a set of values. 
+        These values are specified by the programmer when the enumerated type is declared.
+        Enumerator values are also referred to as enumerators. 
+        It is also allocated by zero, much like the array. 
+        Most importantly, it may be used with switch-case statements.
+
+        As a result, rather than employing if-else statements to direct the program to the proper function based on user input, the implementation of switch-case statements will produce a more elegant and consistent source code.
+
+        Moreover, to help it easier to convert input arguments(format string) into indices, I implemented map objects.
+        Let's include <map> header from C++ library.
+        Map is an abstract object which contains key and value.
+        Let the input argument be key, the statement "map_name[key]" will return the appropriate value which will be an enum type.
+
+        To prepare these map objects, i created Init_Algorithm(), Init_Mode(), Init_Order ,and Init_Output() functions.
+
+        My enum types: 
+        1.Mode
+            enum type - Mode
+            members - a, b, c.
+        2.Algorithm Name
+            enum type - Algorithm
+            members - Selection, Insertion, Bubble, Shaker, Shell, Heap, Merge, Quick, Counting, Radix, Flash.
+        3.Input Size
+            There is an array which store these values: 10,000, 30,000, 50,000, 100,000, 300,000, and 500,000.
+        4.Input Order
+            enum type - Order
+            members - _rand, _nsorted, _sorted, _rev, _all.
+        5.Given Input
+            Path to the input file (string object). The file format is as follows.
+            1st line: an integer n, indicating the number of elements in the input data
+            2nd line: n integers, separated by a single space.
+        6.Output Parameters
+            enum type - Output
+            members - _time, _comp, _both.    
+
+    B.Implement 11 algorithms: Selection Sort, Insertion Sort, Bubble Sort, Shaker Sort, Shell Sort, Heap Sort, Merge Sort, Quick Sort, Counting Sort, Radix Sort, and Flash Sort.
+        Code is written in 11 header files.
+            --> This makes it easier for us to manage source code.
+        Each header has two algorithms: the original and one that counts the amount of comparisons.
+        We may pick which one to call by overloading based on the parameters we supply for that function.
+        
+        "Algo_Option" header:
+            This header has two methods named Algorithm Option().
+            The distinction is in their third argument.
+                +The function that needs "comparison," an unsigned long long object, will invoke the algorithms that include a method to count the number of comparisons.
+                +The function that needs "time," a clock_t object, will invoke the algorithms that have a method that returns the running time of the provided algorithm.
+            These functions make use of a switch-case statement to choose which algorithm to execute based on the input that prefers the algorithm name.
+            Furthermore, if the "just_name" variable is set to true, they will return the name of the algorithm but do nothing else.
+
+    C.Experiments:
+        I created an Experiment_mode() function using the following method.
+        for each Data Order S1
+            create and open output file whose name will base on the iteration that is.
+            -->This file will help record the result for each data order.
+            for each Data Size S2
+                Create array store[] with Data Order S1 and Data Size S2 using GenerateData() function
+                Let array b[] and array a[] is a copy of store[].
+                for each Sorting Algorithm S3
+                    Copy the original values from store[] to a[] and b[]. 
+                    Sort the created array using the Sorting Algorithm S3, while:
+                        + Measuring the running time (in millisecs), and
+                        + Counting the number of comparisons in the algorithm
+                        --> calling Algorithm_Option two times but with difference arguments.
+                    Take note of S1, S2, S3, running time and number of comparisons 
+                end for
+            end for
+        end for
+
+        (1) Data Order: Sorted data (in ascending order), Nearly sorted data, Reverse sorted data, and Randomized data.
+        (2) Data Size: 10,000, 30,000, 50,000, 100,000, 300,000, and 500,000 elements.
+
+
+
+    D.Output specifications:
+    I wrote the following functions:
+        Input Order(format string)
+        --> returns the name of the input order.
+        Output_Option(string out_parameter, const clock_t timer, unsigned long long comparison) 
+        --> displays either the runtime or the number of comparisons, or both. 
+        OutputComparision(clock_t time1, clock_t time2, unsigned long long comparsion1, unsigned long long comparsion2)
+        --> displays running time and number of comparisons of two given sorting algorithms.
+    Again, the usage of switch-case is critical for code uniformity.
+
+
+
+
+    Now let me show you the two mode:
+        Algorithm_Mode(string al, string input_file, int input_size, string input_order, string out_parameter, bool exist)
+            1. al: format string related to the algorithm's name
+            2. input_file: the location of the data set to be read or written
+            3. input_size: the data set's size
+            4. input_order: data set order
+            5. out_parameter: how to display information
+            6. exist: to determine whether the input data is already available
+                If exists is set to true, the program will read data from the input_file.
+                If exist is false, the program will call GenerateData() and create new data set base on input_size and input_order.
+        
+            Data will be stored in array a[], and array b[] is a duplicate of array a[].
+            Algorithm mode will always call Algo_Option() twice, with two separate modes. 
+            We will have the runtime and number of comparisons once the sort algorithms have been completed.
+            Call Output_Option() to inform the user.
+
+
+
+        Comparsion_mode(string algo1, string algo2, string inputFile, int inSize, string inOrder, bool exist)
+            1. algo1, algo2: format strings related to the two algorithm's names
+            2. inputFile: the location of the data set to be read or written
+            3. inSize: the data set's size
+            4. inOrder: data set order
+            5. exist: to determine whether the input data is already available
+                If exists is set to true, the program will read data from the inputFile.
+                If exist is false, the program will call GenerateData() and create new data set base on inSize and inOrder.
+
+            Data will be stored in array a[], and array b[] is a duplicate of array a[].
+            Call Algo_Option() twice, with two separate modes. --> runtime and number of comparisons of the first algorithm. 
+            Reset a and b.
+            Again, Call Algo_Option() twice, with two separate modes. --> runtime and number of comparisons of the second algorithm.
+            Call OutputComparision() to inform the user.
+
+    Driver: main(int argc, char *argv[])
+        In the main() function, we receive input. The supplied input will be saved as a pointer of type char in argv[], with argc being the number of input.
+        We look for the second parameter-argv[1]- to determine which mode to use.
+
+        Case 0: 
+            let temp = argv[3]
+            if temp is a file name, then this is Command1.
+                    Call Algorithm_Mode(argv[2], argv[3], 0, "", argv[4], true);
+                    --> Command1 will get data from a given input file, exist = true.
+            else if argc == 6 then this is Command2
+                    Call Algorithm_Mode(argv[2], "input.txt", stoi(argv[3]), argv[4], argv[5], false);
+                    --> Command2 will generate data with a given size and order, with exist = false.
+                 if argc == 5 then this is Command3
+                    Call Algorithm_Mode(argv[2], "input_1.txt", stoi(argv[3]), "-rand", argv[4], false);
+                         Algorithm_Mode(argv[2], "input_2.txt", stoi(argv[3]), "-nsorted", argv[4], false);
+                         Algorithm_Mode(argv[2], "input_3.txt", stoi(argv[3]), "-sorted", argv[4], false);
+                         Algorithm_Mode(argv[2], "input_4.txt", stoi(argv[3]), "-rev", argv[4], false);
+                    --> Command3 will generate four data sets of the four input orders with a given size, with exist = false.
+        Case 1:
+            if argc == 5 then this is Command4
+                Call Comparsion_mode(argv[2],argv[3],"input.txt",0,"",true);
+                --> Command5 will get data from a given input file, exist = true.
+            if argc == 6 then this is Command5
+                Call Comparsion_mode(argv[2],argv[3],"inputc.txt",stoi(argv[4]),argv[5],false);
+                --> Command6 will generate data with a given size and order, with exist = false.
+
